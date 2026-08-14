@@ -973,20 +973,13 @@
         <label>Nom du contact d'urgence <span class="required">*</span></label>
         <input type="text" id="urgence-nom" name="urgence_nom" placeholder="Prénom NOM">
         <div class="error-msg" id="urgence-error">Champ obligatoire.</div>
+      </div>
+      <div>
+        <label>Téléphone du contact d'urgence <span class="required">*</span></label>
+        <input type="tel" id="urgence-tel" name="urgence_tel" placeholder="06 XX XX XX XX">
+        <div class="error-msg" id="urgence-tel-error">Champ obligatoire.</div>
+      </div>
     </div>
-  </div>
-
-  <div class="upload-certif" style="margin-top:1.5rem;">
-    <label style="font-weight:600; display:block; margin-bottom:.5rem;">
-      📎 Certificat médical (facultatif)
-    </label>
-    <p style="font-size:.85rem; color:#555; margin-bottom:.75rem;">
-      Si vous possédez déjà le certificat médical de non contre-indication, vous pouvez le joindre ici (JPG, PNG ou PDF, max 5 Mo). Vous pourrez aussi l'apporter au dojo.
-    </p>
-    <input type="file" name="certif_medical_1" accept=".jpg,.jpeg,.png,.pdf" class="certif-file-input" style="font-size:.9rem;">
-    <p class="certif-note" style="display:none; color:#2563EB; font-size:.85rem; margin-top:.5rem;">
-      ✓ Fichier sélectionné. Merci de l'envoyer par email à contact@jccspr.fr ou de l'apporter au dojo. Il ne sera pas transmis automatiquement.
-    </p>
   </div>
 
   <div class="nav-bar">
@@ -1044,6 +1037,17 @@
       <span class="alert-icon">⚠️</span>
       <span>Vous avez répondu <strong>Oui</strong> à au moins une question. Un certificat médical de non contre-indication à la pratique du judo devra être remis au club avant le début des cours.</span>
     </div>
+  </div>
+
+  <div class="card" style="margin-top:1.5rem;">
+    <label style="font-weight:600; display:block; margin-bottom:.5rem;">📎 Certificat médical (facultatif)</label>
+    <p style="font-size:.85rem; color:#555; margin-bottom:.75rem;">
+      Si vous possédez déjà le certificat médical de non contre-indication, joignez-le ici (JPG, PNG ou PDF, max 5 Mo). Vous pouvez aussi l'apporter au dojo.
+    </p>
+    <input type="file" name="certif_medical_1" accept=".jpg,.jpeg,.png,.pdf" class="certif-file-input" style="font-size:.9rem;">
+    <p class="certif-note" style="display:none; color:#2563EB; font-size:.85rem; margin-top:.5rem;">
+      ✓ Fichier sélectionné. Merci de l'envoyer par email à mikael.michelas@gmail.com ou de l'apporter au dojo. Il ne sera pas transmis automatiquement.
+    </p>
   </div>
 
   <div class="nav-bar">
