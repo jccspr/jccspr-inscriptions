@@ -1221,7 +1221,7 @@
 </main>
 
 <script>
-var APPS_SCRIPT_URL = "REMPLACER_PAR_URL_APPS_SCRIPT";
+var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPFX0E3mbecoDaSyJEns_hSCl_7sAe2ic6KdeOA_61QUWdQPANo9rn2uHzYZ2rVXbasQ/exec";
 
 // ═══ NAVIGATION ══════════════════════════════════════════════════
 var currentSection = 1;
@@ -1551,22 +1551,24 @@ function submitForm() {
     return;
   }
 
-  // Envoi via XMLHttpRequest — évite les problèmes CORS avec Apps Script
-  // Apps Script reçoit le JSON dans e.postData.contents
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", APPS_SCRIPT_URL, true);
-  xhr.setRequestHeader("Content-Type", "text/plain");
+  // Envoi via image/beacon — contourne totalement CORS
+  // Les données sont encodées en base64 dans un paramètre GET
+  var json     = JSON.stringify(data);
+  var encoded  = btoa(unescape(encodeURIComponent(json)));
+  var url      = APPS_SCRIPT_URL + "?d=" + encodeURIComponent(encoded);
 
-  xhr.onload = function() { afficherConfirmation(); };
-  xhr.onerror = function() {
-    // En cas d'erreur réseau, on affiche quand même la confirmation
-    // car Apps Script peut avoir reçu les données malgré l'erreur CORS
-    afficherConfirmation();
-  };
+  // Méthode 1 : navigator.sendBeacon (moderne, fire-and-forget)
+  var sent = false;
+  if (navigator.sendBeacon) {
+    sent = navigator.sendBeacon(APPS_SCRIPT_URL, json);
+  }
 
-  // Afficher confirmation après 3s dans tous les cas
-  setTimeout(afficherConfirmation, 3000);
-  xhr.send(JSON.stringify(data));
+  // Méthode 2 : image invisible (fonctionne toujours, sans CORS)
+  var img = new Image();
+  img.src = url;
+
+  // Afficher confirmation après 2s dans tous les cas
+  setTimeout(afficherConfirmation, 2000);
 }
 </script>
 </body>
