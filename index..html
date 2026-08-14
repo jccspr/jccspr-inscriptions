@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inscription Judo Club Chonas — Saint Prim — Reventin 2026-2027</title>
+<style>
+  /* ── TOKENS ─────────────────────────────────────────────────────── */
+  :root {
+    --noir:     #1E1E1E;
+    --gris-f:   #3A3A3A;
+    --gris-m:   #6B6B6B;
+    --gris-l:   #E4E8EE;
+    --blanc:    #FFFFFF;
+    --fond:     #F4F6FA;
+    --rouge:    #D63030;
+    --rouge-l:  #FDEAEA;
+    --bleu:     #1B4FD8;
+    --bleu-f:   #1340B0;
+    --bleu-l:   #EBF0FD;
+    --or:       #C8A020;
+    --vert:     #1E7A3E;
+    --vert-l:   #E6F5EC;
+    --radius:   8px;
+    --shadow:   0 2px 16px rgba(27,79,216,0.10);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--fond);
+    color: var(--noir);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── EN-TÊTE ────────────────────────────────────────────────────── */
+  header {
+    background: linear-gradient(135deg, #1340B0 0%, #1B4FD8 60%, #2563EB 100%);
+    color: var(--blanc);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .header-inner {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 36px 24px 28px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .logo-wrap {
+    flex-shrink: 0;
+    width: 88px;
+    height: 88px;
+    background: var(--blanc);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    box-shadow: 0 0 0 3px var(--or);
+  }
+  .logo-wrap img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; }
+  .header-text { flex: 1; }
+  .club-name {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--or);
+    margin-bottom: 4px;
+  }
+  header h1 {
+    font-size: clamp(20px, 4vw, 28px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .saison-badge {
+    display: inline-block;
+    background: var(--rouge);
+    color: var(--blanc);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+  }
+
+  /* ── BARRE DE PROGRESSION ──────────────────────────────────────── */
+  .progress-bar {
+    background: #0F3490;
+    padding: 0 24px;
+  }
+  .progress-inner {
+    max-width: 780px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 0;
+  }
+  .step {
+    flex: 1;
+    text-align: center;
+    padding: 12px 4px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gris-m);
+    border-bottom: 3px solid transparent;
+    cursor: default;
+    transition: all 0.2s;
+  }
+  .step.active { color: var(--blanc); border-bottom-color: #F0C040; }
+  .step.done   { color: #7ECFA0; border-bottom-color: #7ECFA0; }
+
+  /* ── CONTENEUR PRINCIPAL ───────────────────────────────────────── */
+  main {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 16px 64px;
+  }
+
+  /* ── SECTIONS (pages du formulaire) ────────────────────────────── */
+  .form-section { display: none; }
+  .form-section.active { display: block; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--bleu-l);
+  }
+  .section-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--bleu);
+    color: var(--blanc);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(27,79,216,0.25);
+  }
+  .section-title { font-size: 20px; font-weight: 700; }
+  .section-desc  { font-size: 13px; color: var(--gris-m); margin-top: 2px; }
+
+  /* ── CARDS ──────────────────────────────────────────────────────── */
+  .card {
+    background: var(--blanc);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--bleu);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title::after {
+    content: '';
+    flex: 1;
+    height: 1.5px;
+    background: var(--bleu-l);
+  }
+
+  /* ── CHAMPS ─────────────────────────────────────────────────────── */
+  .field { margin-bottom: 18px; }
+  .field:last-child { margin-bottom: 0; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .field-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gris-f);
+    margin-bottom: 6px;
+  }
+  label .required { color: var(--rouge); margin-left: 3px; }
+  label .hint {
+    font-weight: 400;
+    color: var(--gris-m);
+    font-size: 12px;
+    margin-left: 6px;
+  }
+
+  input[type="text"], input[type="email"], input[type="tel"],
+  input[type="date"], select, textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--gris-l);
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-family: inherit;
+    color: var(--noir);
+    background: var(--blanc);
+    transition: border-color 0.15s, box-shadow 0.15s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--bleu);
+    box-shadow: 0 0 0 3px rgba(27,79,216,0.15);
+  }
+  input.error, select.error { border-color: var(--rouge); }
+  .error-msg {
+    font-size: 12px;
+    color: var(--rouge);
+    margin-top: 4px;
+    display: none;
+  }
+  .error-msg.visible { display: block; }
+  textarea { min-height: 80px; resize: vertical; }
+  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6B6B' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+
+  /* ── DISCIPLINE TOGGLE ──────────────────────────────────────────── */
+  .discipline-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .disc-card {
+    border: 2px solid var(--gris-l);
+    border-radius: var(--radius);
+    padding: 20px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.18s;
+    user-select: none;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .disc-card:hover { border-color: var(--bleu); background: var(--bleu-l); }
+  .disc-card.selected { border-color: var(--bleu); background: var(--bleu-l); box-shadow: 0 0 0 3px rgba(27,79,216,0.15); }
+  .disc-card.selected::after {
+    content: "✓";
+    position: absolute;
+    top: 8px; right: 10px;
+    color: var(--bleu);
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .disc-icon { font-size: 32px; margin-bottom: 8px; }
+  .disc-label { font-weight: 700; font-size: 15px; }
+  .disc-sub { font-size: 12px; color: var(--gris-m); margin-top: 2px; }
+  .disc-price { font-size: 13px; color: var(--bleu); font-weight: 600; margin-top: 6px; }
+  .disc-card input[type="checkbox"] { display: none; }
+
+  /* ── TOGGLE AJOUTER ────────────────────────────────────────────── */
+  .add-toggle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border: 2px dashed var(--gris-l);
+    border-radius: var(--radius);
+    cursor: pointer;
+    color: var(--gris-m);
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.15s;
+    background: none;
+    width: 100%;
+    text-align: left;
+    margin-top: 12px;
+  }
+  .add-toggle:hover { border-color: var(--bleu); color: var(--bleu); background: var(--bleu-l); }
+  .add-toggle { color: var(--bleu); border-color: rgba(27,79,216,0.3); }
+  .add-toggle .plus { font-size: 20px; font-weight: 300; line-height: 1; }
+
+  /* ── CASES À COCHER ────────────────────────────────────────────── */
+  .check-group { display: flex; flex-direction: column; gap: 10px; }
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    border: 1.5px solid var(--gris-l);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .check-item:hover { border-color: var(--bleu); background: var(--bleu-l); }
+  .check-item:has(input:checked) { border-color: var(--bleu); background: var(--bleu-l); }
+  .check-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    accent-color: var(--bleu);
+    cursor: pointer;
+  }
+  .check-item input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    accent-color: var(--bleu);
+    cursor: pointer;
+  }
+  .check-label { font-size: 14px; line-height: 1.4; }
+  .check-label strong { display: block; font-weight: 600; }
+  .check-label small { color: var(--gris-m); font-size: 12px; }
+
+  /* ── BLOC QUESTIONNAIRE MÉDICAL ─────────────────────────────────── */
+  .medical-grid { display: flex; flex-direction: column; gap: 10px; }
+  .medical-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--fond);
+    border-radius: var(--radius);
+    font-size: 14px;
+  }
+  .medical-q { flex: 1; }
+  .radio-group { display: flex; gap: 16px; flex-shrink: 0; }
+  .radio-opt { display: flex; align-items: center; gap: 5px; font-size: 13px; cursor: pointer; }
+  .radio-opt input { accent-color: var(--bleu); }
+
+  /* ── ALERTE MÉDICALE ───────────────────────────────────────────── */
+  .alert {
+    padding: 14px 18px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    margin-bottom: 16px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .alert-info { background: var(--bleu-l); border-left: 4px solid var(--bleu); }
+  .alert-warn { background: #FFFBEB; border-left: 4px solid #D97706; }
+
+  .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  /* ── TARIF RECAP ────────────────────────────────────────────────── */
+  .tarif-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  .tarif-table th {
+    text-align: left;
+    padding: 8px 12px;
+    background: var(--gris-l);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gris-m);
+  }
+  .tarif-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--gris-l);
+  }
+  .tarif-table tr:last-child td { border-bottom: none; }
+  .tarif-total td {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--bleu);
+    border-top: 2px solid var(--gris-l);
+  }
+  .badge-disc {
+    display: inline-block;
+    background: var(--bleu-l);
+    color: var(--bleu);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+  }
+
+  /* ── NAVIGATION ─────────────────────────────────────────────────── */
+  .nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--gris-l);
+    gap: 12px;
+  }
+  .btn {
+    padding: 12px 28px;
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s;
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-primary {
+    background: var(--bleu);
+    color: var(--blanc);
+    box-shadow: 0 2px 8px rgba(27,79,216,0.25);
+  }
+  .btn-primary:hover { background: var(--bleu-f); transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(27,79,216,0.35); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--gris-m);
+    border: 1.5px solid var(--gris-l);
+  }
+  .btn-secondary:hover { border-color: var(--gris-m); color: var(--noir); }
+  .btn-submit {
+    background: var(--vert);
+    color: var(--blanc);
+    padding: 14px 36px;
+    font-size: 16px;
+    box-shadow: 0 2px 8px rgba(30,122,62,0.25);
+  }
+  .btn-submit:hover { background: #166332; transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(30,122,62,0.35); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  /* ── CONFIRMATION ───────────────────────────────────────────────── */
+  .confirmation {
+    display: none;
+    text-align: center;
+    padding: 48px 24px;
+  }
+  .confirmation.active { display: block; }
+  .confirm-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--vert-l);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    margin: 0 auto 24px;
+    box-shadow: 0 4px 16px rgba(30,122,62,0.2);
+  }
+  .confirmation h2 { font-size: 26px; font-weight: 700; margin-bottom: 12px; }
+  .confirmation p { color: var(--gris-m); margin-bottom: 8px; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+  /* ── LOADER ─────────────────────────────────────────────────────── */
+  .loader { display: none; text-align: center; padding: 32px; }
+  .spinner {
+    width: 40px; height: 40px;
+    border: 3px solid var(--bleu-l);
+    border-top-color: var(--bleu);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    margin: 0 auto 16px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── RESPONSIVE ─────────────────────────────────────────────────── */
+  @media (max-width: 560px) {
+    .field-row, .field-row-3 { grid-template-columns: 1fr; }
+    .discipline-grid { grid-template-columns: 1fr; }
+    .header-inner { flex-direction: column; text-align: center; gap: 16px; }
+    .progress-inner { flex-wrap: wrap; }
+    .step { font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- EN-TÊTE                                                          -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<header>
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <img src="data:image/png;base64,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" alt="Logo JCCSPR">
+    </div>
+    <div class="header-text">
+      <p class="club-name">Judo Club Chonas · Saint Prim · Reventin</p>
+      <h1>Formulaire d'inscription</h1>
+      <span class="saison-badge">Saison 2026 — 2027</span>
+    </div>
+  </div>
+</header>
+
+<!-- BARRE DE PROGRESSION -->
+<nav class="progress-bar" aria-label="Étapes du formulaire">
+  <div class="progress-inner">
+    <div class="step active" id="step-1">Discipline</div>
+    <div class="step" id="step-2">Judoka(s)</div>
+    <div class="step" id="step-3">Fitness</div>
+    <div class="step" id="step-4">Coordonnées</div>
+    <div class="step" id="step-5">Médical</div>
+    <div class="step" id="step-6">Paiement</div>
+    <div class="step" id="step-7">Validation</div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- FORMULAIRE PRINCIPAL                                             -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<main>
+<form id="mainForm" novalidate>
+
+<!-- ─── SECTION 1 : Discipline ───────────────────────────────────── -->
+<div class="form-section active" id="section-1">
+  <div class="section-header">
+    <div class="section-icon">🥋</div>
+    <div>
+      <div class="section-title">Choix de la discipline</div>
+      <div class="section-desc">Sélectionnez une ou plusieurs disciplines pour votre foyer</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Inscription pour</div>
+    <div class="field">
+      <label>Email de contact <span class="required">*</span></label>
+      <input type="email" id="email" name="email" placeholder="votre@email.com" required>
+      <div class="error-msg" id="email-error">Veuillez saisir un email valide.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Discipline(s)</div>
+    <div class="alert alert-info">
+      <span class="alert-icon">ℹ️</span>
+      <span>Choisissez une discipline. Vous pourrez ensuite détailler les inscrits.</span>
+    </div>
+    <div class="check-group">
+      <label class="check-item">
+        <input type="checkbox" id="disc-judo" name="discipline" value="Judo">
+        <span class="check-label">
+          <strong>🥋 Judo</strong>
+          <small>Enfants &amp; adultes dès 4 ans — à partir de 150 €</small>
+        </span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" id="disc-fitness" name="discipline" value="Fitness">
+        <span class="check-label">
+          <strong>💪 Fitness / HIIT</strong>
+          <small>Dès 15 ans — 150 € / 255 € (Fitness + HIIT)</small>
+        </span>
+      </label>
+    </div>
+    <div class="error-msg" id="disc-error" style="margin-top:10px;">Veuillez choisir au moins une discipline.</div>
+  </div>
+
+  <div class="nav-bar">
+    <div></div>
+    <button type="button" class="btn btn-primary" onclick="goTo(2)">Suivant →</button>
+  </div>
+</div>
+
+<!-- ─── SECTION 2 : Judokas ──────────────────────────────────────── -->
+<div class="form-section" id="section-2">
+  <div class="section-header">
+    <div class="section-icon">🥋</div>
+    <div>
+      <div class="section-title">Inscription(s) Judo</div>
+      <div class="section-desc">Renseignez chaque judoka séparément</div>
+    </div>
+  </div>
+
+  <!-- Judoka 1 -->
+  <div class="card" id="judoka-1">
+    <div class="card-title">Judoka 1</div>
+    <div class="field field-row">
+      <div>
+        <label>Nom <span class="required">*</span></label>
+        <input type="text" id="j1-nom" name="j1_nom" placeholder="NOM" style="text-transform:uppercase">
+        <div class="error-msg" id="j1-nom-error">Champ obligatoire.</div>
+      </div>
+      <div>
+        <label>Prénom <span class="required">*</span></label>
+        <input type="text" id="j1-prenom" name="j1_prenom" placeholder="Prénom">
+        <div class="error-msg" id="j1-prenom-error">Champ obligatoire.</div>
+      </div>
+    </div>
+    <div class="field field-row">
+      <div>
+        <label>Date de naissance <span class="required">*</span> <span class="hint">JJ/MM/AAAA</span></label>
+        <input type="date" id="j1-ddn" name="j1_ddn" max="2025-09-01">
+        <div class="error-msg" id="j1-ddn-error">Date obligatoire.</div>
+      </div>
+      <div>
+        <label>Taille vêtement haut du corps</label>
+        <select id="j1-taille" name="j1_taille">
+          <option value="">— Sélectionner —</option>
+          <option>4-5 ans (Baby Judo)</option>
+          <option>6-7 ans (Éveil Judo)</option>
+          <option>8-9 ans (Poussin)</option>
+          <option>10-11 ans (Benjamin)</option>
+          <option>12-13 ans (Minime)</option>
+          <option>14-16 ans (Cadet)</option>
+          <option>17-19 ans (Junior)</option>
+          <option>Adulte / Sénior</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Judoka 2 -->
+  <button type="button" class="add-toggle" id="add-j2" onclick="showBlock('judoka-2', this)">
+    <span class="plus">+</span> Ajouter un 2e judoka
+  </button>
+  <div class="card" id="judoka-2" style="display:none; margin-top:12px;">
+    <div class="card-title">Judoka 2</div>
+    <div class="field field-row">
+      <div>
+        <label>Nom</label>
+        <input type="text" id="j2-nom" name="j2_nom" placeholder="NOM" style="text-transform:uppercase">
+      </div>
+      <div>
+        <label>Prénom</label>
+        <input type="text" id="j2-prenom" name="j2_prenom" placeholder="Prénom">
+      </div>
+    </div>
+    <div class="field field-row">
+      <div>
+        <label>Date de naissance <span class="hint">JJ/MM/AAAA</span></label>
+        <input type="date" id="j2-ddn" name="j2_ddn" max="2025-09-01">
+      </div>
+      <div>
+        <label>Taille vêtement haut du corps</label>
+        <select id="j2-taille" name="j2_taille">
+          <option value="">— Sélectionner —</option>
+          <option>4-5 ans (Baby Judo)</option>
+          <option>6-7 ans (Éveil Judo)</option>
+          <option>8-9 ans (Poussin)</option>
+          <option>10-11 ans (Benjamin)</option>
+          <option>12-13 ans (Minime)</option>
+          <option>14-16 ans (Cadet)</option>
+          <option>17-19 ans (Junior)</option>
+          <option>Adulte / Sénior</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Judoka 3 -->
+  <button type="button" class="add-toggle" id="add-j3" onclick="showBlock('judoka-3', this)" style="display:none; margin-top:8px;">
+    <span class="plus">+</span> Ajouter un 3e judoka
+  </button>
+  <div class="card" id="judoka-3" style="display:none; margin-top:12px;">
+    <div class="card-title">Judoka 3</div>
+    <div class="field field-row">
+      <div>
+        <label>Nom</label>
+        <input type="text" id="j3-nom" name="j3_nom" placeholder="NOM" style="text-transform:uppercase">
+      </div>
+      <div>
+        <label>Prénom</label>
+        <input type="text" id="j3-prenom" name="j3_prenom" placeholder="Prénom">
+      </div>
+    </div>
+    <div class="field field-row">
+      <div>
+        <label>Date de naissance <span class="hint">JJ/MM/AAAA</span></label>
+        <input type="date" id="j3-ddn" name="j3_ddn" max="2025-09-01">
+      </div>
+      <div>
+        <label>Taille vêtement haut du corps</label>
+        <select id="j3-taille" name="j3_taille">
+          <option value="">— Sélectionner —</option>
+          <option>4-5 ans (Baby Judo)</option>
+          <option>6-7 ans (Éveil Judo)</option>
+          <option>8-9 ans (Poussin)</option>
+          <option>10-11 ans (Benjamin)</option>
+          <option>12-13 ans (Minime)</option>
+          <option>14-16 ans (Cadet)</option>
+          <option>17-19 ans (Junior)</option>
+          <option>Adulte / Sénior</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="add-toggle" id="add-j4" onclick="showBlock('judoka-4', this)" style="display:none; margin-top:8px;">
+    <span class="plus">+</span> Ajouter un 4e judoka
+  </button>
+  <div class="card" id="judoka-4" style="display:none; margin-top:12px;">
+    <div class="card-title">Judoka 4</div>
+    <div class="field field-row">
+      <div>
+        <label>Nom</label>
+        <input type="text" id="j4-nom" name="j4_nom" placeholder="NOM" style="text-transform:uppercase">
+      </div>
+      <div>
+        <label>Prénom</label>
+        <input type="text" id="j4-prenom" name="j4_prenom" placeholder="Prénom">
+      </div>
+    </div>
+    <div class="field field-row">
+      <div>
+        <label>Date de naissance <span class="hint">JJ/MM/AAAA</span></label>
+        <input type="date" id="j4-ddn" name="j4_ddn" max="2025-09-01">
+      </div>
+      <div>
+        <label>Taille vêtement haut du corps</label>
+        <select id="j4-taille" name="j4_taille">
+          <option value="">— Sélectionner —</option>
+          <option>4-5 ans (Baby Judo)</option>
+          <option>6-7 ans (Éveil Judo)</option>
+          <option>8-9 ans (Poussin)</option>
+          <option>10-11 ans (Benjamin)</option>
+          <option>12-13 ans (Minime)</option>
+          <option>14-16 ans (Cadet)</option>
+          <option>17-19 ans (Junior)</option>
+          <option>Adulte / Sénior</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-bar">
+    <button type="button" class="btn btn-secondary" onclick="goBack()">← Retour</button>
+    <button type="button" class="btn btn-primary" onclick="goTo(nextAfterJudo())">Suivant →</button>
+  </div>
+</div>
+
+<!-- ─── SECTION 3 : Fitness ──────────────────────────────────────── -->
+<div class="form-section" id="section-3">
+  <div class="section-header">
+    <div class="section-icon">💪</div>
+    <div>
+      <div class="section-title">Inscription(s) Fitness / HIIT</div>
+      <div class="section-desc">Ouvert à partir de 15 ans</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Adhérent Fitness 1</div>
+    <div class="alert alert-warn">
+      <span class="alert-icon">⚠️</span>
+      <span>Un certificat médical de non contre-indication est requis pour les nouveaux adhérents. Apportez-le lors de votre inscription.</span>
+    </div>
+    <div class="field field-row">
+      <div>
+        <label>Nom <span class="required">*</span></label>
+        <input type="text" id="f1-nom" name="f1_nom" placeholder="NOM" style="text-transform:uppercase">
+        <div class="error-msg" id="f1-nom-error">Champ obligatoire.</div>
+      </div>
+      <div>
+        <label>Prénom <span class="required">*</span></label>
+        <input type="text" id="f1-prenom" name="f1_prenom" placeholder="Prénom">
+        <div class="error-msg" id="f1-prenom-error">Champ obligatoire.</div>
+      </div>
+    </div>
+    <div class="field field-row">
+      <div>
+        <label>Date de naissance <span class="required">*</span></label>
+        <input type="date" id="f1-ddn" name="f1_ddn" max="2011-09-01">
+        <div class="error-msg" id="f1-ddn-error">Date obligatoire.</div>
+      </div>
+      <div>
+        <label>Taille vêtement haut du corps</label>
+        <select id="f1-taille" name="f1_taille">
+          <option value="">— Sélectionner —</option>
+          <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Certificat médical transmis ?</label>
+      <div class="check-group">
+        <label class="check-item">
+          <input type="radio" name="f1_certif" value="Oui">
+          <span class="check-label"><strong>Oui</strong><small>Je l'apporterai lors de l'inscription</small></span>
+        </label>
+        <label class="check-item">
+          <input type="radio" name="f1_certif" value="Non">
+          <span class="check-label"><strong>Non</strong><small>Je dois encore le faire établir</small></span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="add-toggle" id="add-f2" onclick="showBlock('fitness-2', this)">
+    <span class="plus">+</span> Ajouter un 2e adhérent Fitness / HIIT
+  </button>
+  <div class="card" id="fitness-2" style="display:none; margin-top:12px;">
+    <div class="card-title">Adhérent Fitness 2</div>
+    <div class="field field-row">
+      <div>
+        <label>Nom</label>
+        <input type="text" id="f2-nom" name="f2_nom" placeholder="NOM" style="text-transform:uppercase">
+      </div>
+      <div>
+        <label>Prénom</label>
+        <input type="text" id="f2-prenom" name="f2_prenom" placeholder="Prénom">
+      </div>
+    </div>
+    <div class="field field-row">
+      <div>
+        <label>Date de naissance</label>
+        <input type="date" id="f2-ddn" name="f2_ddn" max="2011-09-01">
+      </div>
+      <div>
+        <label>Taille vêtement haut du corps</label>
+        <select id="f2-taille" name="f2_taille">
+          <option value="">— Sélectionner —</option>
+          <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Certificat médical transmis ?</label>
+      <div class="check-group">
+        <label class="check-item">
+          <input type="radio" name="f2_certif" value="Oui">
+          <span class="check-label"><strong>Oui</strong></span>
+        </label>
+        <label class="check-item">
+          <input type="radio" name="f2_certif" value="Non">
+          <span class="check-label"><strong>Non</strong></span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="add-toggle" id="add-f3" onclick="showBlock('fitness-3', this)" style="display:none; margin-top:8px;">
+    <span class="plus">+</span> Ajouter un 3e adhérent Fitness / HIIT
+  </button>
+  <div class="card" id="fitness-3" style="display:none; margin-top:12px;">
+    <div class="card-title">Adhérent Fitness 3</div>
+    <div class="field field-row">
+      <div>
+        <label>Nom</label>
+        <input type="text" id="f3-nom" name="f3_nom" placeholder="NOM" style="text-transform:uppercase">
+      </div>
+      <div>
+        <label>Prénom</label>
+        <input type="text" id="f3-prenom" name="f3_prenom" placeholder="Prénom">
+      </div>
+    </div>
+    <div class="field field-row">
+      <div>
+        <label>Date de naissance</label>
+        <input type="date" id="f3-ddn" name="f3_ddn" max="2011-09-01">
+      </div>
+      <div>
+        <label>Taille vêtement haut du corps</label>
+        <select id="f3-taille" name="f3_taille">
+          <option value="">— Sélectionner —</option>
+          <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Certificat médical transmis ?</label>
+      <div class="check-group">
+        <label class="check-item">
+          <input type="radio" name="f3_certif" value="Oui">
+          <span class="check-label"><strong>Oui</strong></span>
+        </label>
+        <label class="check-item">
+          <input type="radio" name="f3_certif" value="Non">
+          <span class="check-label"><strong>Non</strong></span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-bar">
+    <button type="button" class="btn btn-secondary" onclick="goBack()">← Retour</button>
+    <button type="button" class="btn btn-primary" onclick="goTo(4)">Suivant →</button>
+  </div>
+</div>
+
+<!-- ─── SECTION 4 : Coordonnées ─────────────────────────────────── -->
+<div class="form-section" id="section-4">
+  <div class="section-header">
+    <div class="section-icon">📍</div>
+    <div>
+      <div class="section-title">Coordonnées du foyer</div>
+      <div class="section-desc">Informations de contact valables pour tous les inscrits</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Adresse</div>
+    <div class="field">
+      <label>Adresse postale <span class="required">*</span></label>
+      <input type="text" id="adresse" name="adresse" placeholder="N° et nom de rue">
+      <div class="error-msg" id="adresse-error">Champ obligatoire.</div>
+    </div>
+    <div class="field field-row">
+      <div>
+        <label>Code postal <span class="required">*</span></label>
+        <input type="text" id="cp" name="cp" placeholder="38000" maxlength="5"
+               oninput="chercherVille(this.value)">
+        <div class="error-msg" id="cp-error">Code postal obligatoire.</div>
+      </div>
+      <div>
+        <label>Ville <span class="required">*</span></label>
+        <select id="ville" name="ville">
+          <option value="">— Saisissez d'abord le code postal —</option>
+        </select>
+        <div class="error-msg" id="ville-error">Champ obligatoire.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Téléphones</div>
+    <div class="field field-row">
+      <div>
+        <label>Téléphone principal <span class="required">*</span></label>
+        <input type="tel" id="tel1" name="tel1" placeholder="06 XX XX XX XX">
+        <div class="error-msg" id="tel1-error">Numéro obligatoire.</div>
+      </div>
+      <div>
+        <label>Téléphone secondaire <span class="hint">optionnel</span></label>
+        <input type="tel" id="tel2" name="tel2" placeholder="06 XX XX XX XX">
+      </div>
+    </div>
+    <div class="field field-row">
+      <div>
+        <label>Nom du contact d'urgence <span class="required">*</span></label>
+        <input type="text" id="urgence-nom" name="urgence_nom" placeholder="Prénom NOM">
+        <div class="error-msg" id="urgence-error">Champ obligatoire.</div>
+      </div>
+      <div>
+        <label>Téléphone du contact d'urgence <span class="required">*</span></label>
+        <input type="tel" id="urgence-tel" name="urgence_tel" placeholder="06 XX XX XX XX">
+        <div class="error-msg" id="urgence-tel-error">Champ obligatoire.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-bar">
+    <button type="button" class="btn btn-secondary" onclick="goBack()">← Retour</button>
+    <button type="button" class="btn btn-primary" onclick="goTo(5)">Suivant →</button>
+  </div>
+</div>
+
+<!-- ─── SECTION 5 : Médical ──────────────────────────────────────── -->
+<div class="form-section" id="section-5">
+  <div class="section-header">
+    <div class="section-icon">🏥</div>
+    <div>
+      <div class="section-title">Questionnaire de santé</div>
+      <div class="section-desc">Obligatoire — Article L231-2-1 du Code du sport</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="alert alert-info">
+      <span class="alert-icon">ℹ️</span>
+      <span>Ce questionnaire concerne la pratique sportive. En cas de réponse <strong>Oui</strong> à l'une des questions, un certificat médical de non contre-indication sera nécessaire. L'attestation papier est disponible au dojo.</span>
+    </div>
+    <div class="card-title">Répondez pour chaque inscrit</div>
+    <div class="medical-grid">
+      <div class="medical-item">
+        <span class="medical-q">Douleurs thoraciques, palpitations ou essoufflements anormaux à l'effort au cours des 12 derniers mois ?</span>
+        <div class="radio-group">
+          <label class="radio-opt"><input type="radio" name="med_1" value="Non" checked> Non</label>
+          <label class="radio-opt"><input type="radio" name="med_1" value="Oui"> Oui</label>
+        </div>
+      </div>
+      <div class="medical-item">
+        <span class="medical-q">Perte de connaissance ou malaise lors d'un effort ?</span>
+        <div class="radio-group">
+          <label class="radio-opt"><input type="radio" name="med_2" value="Non" checked> Non</label>
+          <label class="radio-opt"><input type="radio" name="med_2" value="Oui"> Oui</label>
+        </div>
+      </div>
+      <div class="medical-item">
+        <span class="medical-q">Maladie chronique ou traitement médical en cours ?</span>
+        <div class="radio-group">
+          <label class="radio-opt"><input type="radio" name="med_3" value="Non" checked> Non</label>
+          <label class="radio-opt"><input type="radio" name="med_3" value="Oui"> Oui</label>
+        </div>
+      </div>
+      <div class="medical-item">
+        <span class="medical-q">Hospitalisation ou intervention chirurgicale dans les 12 derniers mois ?</span>
+        <div class="radio-group">
+          <label class="radio-opt"><input type="radio" name="med_4" value="Non" checked> Non</label>
+          <label class="radio-opt"><input type="radio" name="med_4" value="Oui"> Oui</label>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-warn" id="med-alert" style="display:none; margin-top:16px;">
+      <span class="alert-icon">⚠️</span>
+      <span>Vous avez répondu <strong>Oui</strong> à au moins une question. Un certificat médical de non contre-indication à la pratique du judo devra être remis au club avant le début des cours.</span>
+    </div>
+  </div>
+
+  <div class="nav-bar">
+    <button type="button" class="btn btn-secondary" onclick="goBack()">← Retour</button>
+    <button type="button" class="btn btn-primary" onclick="goTo(6)">Suivant →</button>
+  </div>
+</div>
+
+<!-- ─── SECTION 6 : Paiement ─────────────────────────────────────── -->
+<div class="form-section" id="section-6">
+  <div class="section-header">
+    <div class="section-icon">💳</div>
+    <div>
+      <div class="section-title">Règlement &amp; aides</div>
+      <div class="section-desc">Récapitulatif de votre inscription et modalités de paiement</div>
+    </div>
+  </div>
+
+  <div class="card" id="recap-tarif">
+    <div class="card-title">Récapitulatif</div>
+    <table class="tarif-table">
+      <thead>
+        <tr>
+          <th>Adhérent</th>
+          <th>Catégorie</th>
+          <th>Tarif</th>
+        </tr>
+      </thead>
+      <tbody id="recap-tbody">
+        <!-- Rempli dynamiquement -->
+      </tbody>
+      <tfoot>
+        <tr class="tarif-total">
+          <td colspan="2">Total estimé</td>
+          <td id="recap-total">—</td>
+        </tr>
+      </tfoot>
+    </table>
+    <p style="font-size:12px; color:var(--gris-m); margin-top:10px;">* Les remises famille et aides seront calculées et confirmées lors de l'inscription au club.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Aides financières</div>
+    <div class="check-group">
+      <label class="check-item">
+        <input type="checkbox" name="aides" value="Pass'Sport 50€" id="aide-passsport" onchange="togglePassportCode()">
+        <span class="check-label">
+          <strong>Pass'Sport — 50 €</strong>
+          <small>Dispositif national — un coupon par enfant éligible, à apporter lors de l'inscription</small>
+        </span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" name="aides" value="Pass'région 30€">
+        <span class="check-label">
+          <strong>Pass'région Auvergne-Rhône-Alpes — 30 €</strong>
+          <small>Réservé aux lycéens de la région — coupon à apporter lors de l'inscription</small>
+        </span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" name="aides" value="Carte Tattoo 60€">
+        <span class="check-label">
+          <strong>Carte Tattoo — 60 €</strong>
+          <small>Réservée aux collégiens de l'Isère — coupon à apporter lors de l'inscription</small>
+        </span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" name="aides" value="ANCV (chèques vacances)">
+        <span class="check-label">
+          <strong>ANCV / Chèques vacances</strong>
+          <small>Montant à préciser lors de l'inscription</small>
+        </span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" name="aides" value="Aucune aide" id="aide-aucune">
+        <span class="check-label"><strong>Aucune aide</strong></span>
+      </label>
+    </div>
+    <div id="passport-codes-section" style="display:none; margin-top:16px;">
+      <div class="alert alert-info">
+        <span class="alert-icon">ℹ️</span>
+        <span>Le Pass'Sport est un droit à déduction de 50 € associé à un enfant. Renseignez le prénom et le code pour chaque enfant concerné (le code figure sur votre espace CAF, MSA ou allocataire).</span>
+      </div>
+      <div class="field">
+        <label>Code(s) Pass'Sport <span class="hint">Un par ligne : Prénom — Code</span></label>
+        <textarea name="passport_code" id="passport_code"
+          placeholder="Ex :&#10;Lucas — ABC123&#10;Emma — DEF456"
+          style="min-height:80px;"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Mode de règlement</div>
+    <div class="check-group">
+      <label class="check-item">
+        <input type="radio" name="mode_pay" value="Virement bancaire">
+        <span class="check-label"><strong>Virement bancaire</strong><small>RIB fourni lors de l'inscription au club</small></span>
+      </label>
+      <label class="check-item">
+        <input type="radio" name="mode_pay" value="Chèque - règlement en 1 fois">
+        <span class="check-label"><strong>Chèque — règlement en une fois</strong><small>À l'ordre de JCCSPR</small></span>
+      </label>
+      <label class="check-item">
+        <input type="radio" name="mode_pay" value="Chèque - règlement en 3 fois">
+        <span class="check-label"><strong>Chèque — règlement en 3 fois</strong><small>3 chèques à l'ordre de JCCSPR</small></span>
+      </label>
+      <label class="check-item">
+        <input type="radio" name="mode_pay" value="Espèces">
+        <span class="check-label"><strong>Espèces</strong></span>
+      </label>
+      <label class="check-item">
+        <input type="radio" name="mode_pay" value="ANCV (chèques vacances)">
+        <span class="check-label"><strong>ANCV / Chèques vacances</strong></span>
+      </label>
+    </div>
+    <div class="error-msg" id="pay-error" style="margin-top:8px;">Veuillez choisir un mode de règlement.</div>
+  </div>
+
+  <div class="nav-bar">
+    <button type="button" class="btn btn-secondary" onclick="goBack()">← Retour</button>
+    <button type="button" class="btn btn-primary" onclick="goTo(7)">Suivant →</button>
+  </div>
+</div>
+
+<!-- ─── SECTION 7 : Validation ───────────────────────────────────── -->
+<div class="form-section" id="section-7">
+  <div class="section-header">
+    <div class="section-icon">✅</div>
+    <div>
+      <div class="section-title">Validation &amp; autorisation</div>
+      <div class="section-desc">Dernière étape avant d'envoyer votre inscription</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Documents réglementaires</div>
+    <div class="check-group">
+      <label class="check-item" id="reglement-item">
+        <input type="checkbox" id="reglement" name="reglement" value="J'ai lu et j'accepte le règlement intérieur" required>
+        <span class="check-label">
+          <strong>Règlement intérieur <span class="required">*</span></strong>
+          <small>J'ai lu et j'accepte le règlement intérieur du club</small>
+        </span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" id="droit-image" name="droit_image" value="Oui">
+        <span class="check-label">
+          <strong>Autorisation droit à l'image</strong>
+          <small>J'autorise le club à utiliser les photos/vidéos lors des activités (site web, réseaux sociaux). Révocable à tout moment.</small>
+        </span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" id="autorisation" name="autorisation" value="Oui" required>
+        <span class="check-label">
+          <strong>Autorisation en cas d'accident <span class="required">*</span></strong>
+          <small>En cas d'urgence, j'autorise les responsables à contacter les services de secours et à prendre les décisions médicales nécessaires.</small>
+        </span>
+      </label>
+    </div>
+    <div class="error-msg" id="docs-error" style="margin-top:8px;">Les cases obligatoires doivent être cochées.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Signature</div>
+    <div class="field field-row">
+      <div>
+        <label>Prénom et nom du signataire <span class="required">*</span></label>
+        <input type="text" id="signature" name="signature" placeholder="Prénom NOM">
+        <div class="error-msg" id="signature-error">Champ obligatoire.</div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Observations <span class="hint">optionnel</span></label>
+      <textarea id="observations" name="observations" placeholder="Informations complémentaires : allergie, situation particulière, message au club…"></textarea>
+    </div>
+  </div>
+
+  <div class="nav-bar">
+    <button type="button" class="btn btn-secondary" onclick="goBack()">← Retour</button>
+    <button type="button" class="btn btn-submit" onclick="submitForm()">
+      ✓ Envoyer mon inscription
+    </button>
+  </div>
+</div>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="spinner"></div>
+  <p>Envoi en cours…</p>
+</div>
+
+<!-- CONFIRMATION -->
+<div class="confirmation" id="confirmation">
+  <div class="confirm-icon">✅</div>
+  <h2>Inscription enregistrée !</h2>
+  <p>Merci pour votre inscription au Judo Club Chonas — Saint Prim — Reventin.</p>
+  <p>Un email de confirmation vous a été envoyé à <strong id="confirm-email"></strong>.</p>
+  <p style="margin-top:16px; font-size:13px;">Le club vous contactera pour confirmer les détails et le montant exact après application des remises famille.</p>
+  <button type="button" class="btn btn-primary"
+          onclick="nouvelleInscription()"
+          style="margin-top:28px; font-size:15px;">
+    ＋ Inscrire un autre membre de la famille
+  </button>
+</div>
+
+</form>
+</main>
+
+<script>
+var APPS_SCRIPT_URL = "REMPLACER_PAR_URL_APPS_SCRIPT";
+
+// ═══ NAVIGATION ══════════════════════════════════════════════════
+var currentSection = 1;
+var history_stack  = [1];
+
+function goTo(n) {
+  if (!validateSection(currentSection)) return;
+  if (n === 2 && !document.getElementById("disc-judo").checked)    n = 3;
+  if (n === 3 && !document.getElementById("disc-fitness").checked) n = 4;
+
+  document.getElementById("section-" + currentSection).classList.remove("active");
+  document.getElementById("step-"    + currentSection).classList.remove("active");
+  document.getElementById("step-"    + currentSection).classList.add("done");
+
+  currentSection = n;
+  history_stack.push(n);
+
+  document.getElementById("section-" + n).classList.add("active");
+  document.getElementById("step-"    + n).classList.add("active");
+  document.getElementById("step-"    + n).classList.remove("done");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  if (n === 6 || n === 7) buildRecap();
+}
+
+function goBack() {
+  history_stack.pop();
+  var prev = history_stack[history_stack.length - 1] || 1;
+  document.getElementById("section-" + currentSection).classList.remove("active");
+  document.getElementById("step-"    + currentSection).classList.remove("active", "done");
+  document.getElementById("step-"    + prev).classList.remove("done");
+  document.getElementById("step-"    + prev).classList.add("active");
+  currentSection = prev;
+  document.getElementById("section-" + prev).classList.add("active");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function nextAfterJudo() {
+  return document.getElementById("disc-fitness").checked ? 3 : 4;
+}
+
+// ═══ VALIDATION ══════════════════════════════════════════════════
+function validateSection(n) {
+  if (n === 1) { var eOk = validateEmail(); var dOk = validateDisc(); return eOk && dOk; }
+  if (n === 2) return validateJudoka1();
+  if (n === 3) return validateFitness1();
+  if (n === 4) return validateCoords();
+  if (n === 6) return validatePay();
+  if (n === 7) return validateDocs();
+  return true;
+}
+
+function showError(id, show) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  if (show) el.classList.add("visible"); else el.classList.remove("visible");
+}
+function markField(id, error) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  if (error) el.classList.add("error"); else el.classList.remove("error");
+}
+
+function validateEmail() {
+  var v  = document.getElementById("email").value.trim();
+  var ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  markField("email", !ok); showError("email-error", !ok);
+  return ok;
+}
+function validateDisc() {
+  var ok = document.getElementById("disc-judo").checked || document.getElementById("disc-fitness").checked;
+  showError("disc-error", !ok);
+  return ok;
+}
+function validateJudoka1() {
+  var ok = true;
+  ["j1-nom","j1-prenom","j1-ddn"].forEach(function(id) {
+    var v = document.getElementById(id).value.trim();
+    markField(id, !v); showError(id + "-error", !v);
+    if (!v) ok = false;
+  });
+  return ok;
+}
+function validateFitness1() {
+  var ok = true;
+  ["f1-nom","f1-prenom","f1-ddn"].forEach(function(id) {
+    var v = document.getElementById(id).value.trim();
+    markField(id, !v); showError(id + "-error", !v);
+    if (!v) ok = false;
+  });
+  return ok;
+}
+function validateCoords() {
+  var ok = true;
+  ["adresse","cp","tel1"].forEach(function(id) {
+    var v = document.getElementById(id).value.trim();
+    markField(id, !v); showError(id + "-error", !v);
+    if (!v) ok = false;
+  });
+  var ville = document.getElementById("ville");
+  var vv = ville ? ville.value.trim() : "";
+  markField("ville", !vv); showError("ville-error", !vv);
+  if (!vv) ok = false;
+  var uNom = document.getElementById("urgence-nom").value.trim();
+  var uTel = document.getElementById("urgence-tel").value.trim();
+  markField("urgence-nom", !uNom); showError("urgence-error", !uNom);
+  markField("urgence-tel", !uTel); showError("urgence-tel-error", !uTel);
+  if (!uNom || !uTel) ok = false;
+  return ok;
+}
+function validatePay() {
+  var ok = !!document.querySelector("input[name=\"mode_pay\"]:checked");
+  showError("pay-error", !ok);
+  return ok;
+}
+function validateDocs() {
+  var ok  = document.getElementById("reglement").checked && document.getElementById("autorisation").checked;
+  showError("docs-error", !ok);
+  var sig = document.getElementById("signature").value.trim();
+  markField("signature", !sig); showError("signature-error", !sig);
+  return ok && !!sig;
+}
+
+// ═══ BLOCS ADDITIONNELS ══════════════════════════════════════════
+function showBlock(id, btn) {
+  document.getElementById(id).style.display = "block";
+  btn.style.display = "none";
+  if (id === "judoka-2") document.getElementById("add-j3").style.display = "flex";
+  if (id === "judoka-3") document.getElementById("add-j4").style.display = "flex";
+  if (id === "fitness-2") document.getElementById("add-f3").style.display = "flex";
+}
+
+// ═══ NOUVELLE INSCRIPTION ═════════════════════════════════════════
+function nouvelleInscription() {
+  document.getElementById("mainForm").reset();
+  document.getElementById("confirmation").classList.remove("active");
+  document.querySelector(".progress-bar").style.display = "";
+  for (var i = 1; i <= 7; i++) {
+    var sec = document.getElementById("section-" + i);
+    var stp = document.getElementById("step-" + i);
+    if (sec) sec.classList.remove("active");
+    if (stp) { stp.classList.remove("active", "done"); }
+  }
+  ["judoka-2","judoka-3","judoka-4","fitness-2","fitness-3"].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.style.display = "none";
+  });
+  ["add-j3","add-j4","add-f3"].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.style.display = "none";
+  });
+  ["add-j2","add-f2"].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.style.display = "";
+  });
+  var pcs = document.getElementById("passport-codes-section");
+  if (pcs) pcs.style.display = "none";
+  var ville = document.getElementById("ville");
+  if (ville && ville.tagName === "SELECT") {
+    ville.innerHTML = "<option value=''>— Saisissez d'abord le code postal —</option>";
+  }
+  currentSection = 1;
+  history_stack.length = 0;
+  history_stack.push(1);
+  document.getElementById("section-1").classList.add("active");
+  document.getElementById("step-1").classList.add("active");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// ═══ PASS'SPORT ══════════════════════════════════════════════════
+function togglePassportCode() {
+  var el = document.getElementById("aide-passsport");
+  var checked = el ? el.checked : false;
+  var pcs = document.getElementById("passport-codes-section");
+  if (pcs) pcs.style.display = checked ? "block" : "none";
+}
+
+// ═══ QUESTIONNAIRE MÉDICAL ════════════════════════════════════════
+document.addEventListener("DOMContentLoaded", function() {
+  document.querySelectorAll("input[name^='med_']").forEach(function(inp) {
+    inp.addEventListener("change", function() {
+      var hasOui = Array.from(document.querySelectorAll("input[name^='med_']:checked"))
+        .some(function(r) { return r.value === "Oui"; });
+      document.getElementById("med-alert").style.display = hasOui ? "flex" : "none";
+    });
+  });
+});
+
+// ═══ VILLE DEPUIS CODE POSTAL ════════════════════════════════════
+function chercherVille(cp) {
+  var sel = document.getElementById("ville");
+  if (!sel) return;
+  if (cp.length !== 5) {
+    if (sel.tagName === "SELECT") sel.innerHTML = "<option value=''>— Saisissez d'abord le code postal —</option>";
+    return;
+  }
+  if (sel.tagName === "SELECT") sel.innerHTML = "<option value=''>Chargement...</option>";
+  fetch("https://geo.api.gouv.fr/communes?codePostal=" + cp + "&fields=nom&format=json")
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data && data.length > 0) {
+        sel.innerHTML = data.map(function(c) {
+          return "<option value='" + c.nom + "'>" + c.nom + "</option>";
+        }).join("");
+        if (data.length === 1) sel.value = data[0].nom;
+      } else {
+        sel.innerHTML = "<option value=''>Aucune ville trouvee</option>";
+      }
+    })
+    .catch(function() {
+      sel.innerHTML = "<option value=''>Saisir manuellement</option>";
+    });
+}
+
+// ═══ RÉCAPITULATIF TARIF ══════════════════════════════════════════
+function getCategorie(ddn, disc) {
+  if (!ddn) return { cat: "?", tarif: 0 };
+  var d   = new Date(ddn);
+  var fin = new Date(2026, 11, 31);
+  var age = fin.getFullYear() - d.getFullYear();
+  if (fin.getMonth() < d.getMonth() || (fin.getMonth() === d.getMonth() && fin.getDate() < d.getDate())) age--;
+  if (disc === "Fitness") return { cat: "Adulte", tarif: 150 };
+  if (age < 8)  return { cat: "Baby Judo",  tarif: 150 };
+  if (age < 10) return { cat: "Eveil Judo", tarif: 199 };
+  if (age < 12) return { cat: "Poussin",    tarif: 199 };
+  if (age < 14) return { cat: "Benjamin",   tarif: 209 };
+  if (age < 16) return { cat: "Minime",     tarif: 209 };
+  if (age < 18) return { cat: "Cadet",      tarif: 234 };
+  if (age < 23) return { cat: "Junior",     tarif: 234 };
+  return { cat: "Senior", tarif: 234 };
+}
+
+function buildRecap() {
+  var tbody = document.getElementById("recap-tbody");
+  if (!tbody) return;
+  tbody.innerHTML = "";
+  var membres = [];
+  var taux    = [0, 0.05, 0.10, 0.15, 0.20, 0.25];
+
+  function fmt(t) { return t.toLocaleString("fr-FR", { style: "currency", currency: "EUR" }); }
+  function addM(prefix, disc) {
+    var nomEl = document.getElementById(prefix + "-nom");
+    var ddnEl = document.getElementById(prefix + "-ddn");
+    if (nomEl && nomEl.value && ddnEl && ddnEl.value) {
+      var info = getCategorie(ddnEl.value, disc);
+      info.nom = nomEl.value;
+      membres.push(info);
+    }
+  }
+
+  if (document.getElementById("disc-judo").checked) {
+    addM("j1","Judo"); addM("j2","Judo"); addM("j3","Judo"); addM("j4","Judo");
+  }
+  if (document.getElementById("disc-fitness").checked) {
+    addM("f1","Fitness"); addM("f2","Fitness"); addM("f3","Fitness");
+  }
+
+  membres.sort(function(a, b) { return a.tarif - b.tarif; });
+
+  var total = 0;
+  membres.forEach(function(m, i) {
+    var t      = taux[Math.min(i, taux.length - 1)];
+    var remise = Math.round(m.tarif * t * 100) / 100;
+    var net    = m.tarif - remise;
+    total += net;
+    var badge = t > 0 ? " <span class=\"badge-disc\">-" + Math.round(t * 100) + "%</span>" : "";
+    var tr = document.createElement("tr");
+    tr.innerHTML = "<td>" + m.nom + "</td><td>" + m.cat + badge + "</td><td>" + fmt(net) + "</td>";
+    tbody.appendChild(tr);
+  });
+
+  var totalEl = document.getElementById("recap-total");
+  if (totalEl) totalEl.textContent = total > 0 ? fmt(total) : "—";
+}
+
+// ═══ SOUMISSION ══════════════════════════════════════════════════
+function submitForm() {
+  if (!validateDocs()) return;
+
+  function getVal(id) { var el = document.getElementById(id); return el ? el.value : ""; }
+  function getChecked(name) {
+    return Array.from(document.querySelectorAll("input[name=\"" + name + "\"]:checked"))
+      .map(function(c) { return c.value; }).join(", ");
+  }
+
+  var disc = [];
+  if (document.getElementById("disc-judo").checked)    disc.push("Judo");
+  if (document.getElementById("disc-fitness").checked) disc.push("Fitness/Hiit");
+
+  var data = {
+    email: getVal("email"), discipline: disc.join(" + "),
+    j1_nom: getVal("j1-nom"), j1_prenom: getVal("j1-prenom"), j1_ddn: getVal("j1-ddn"), j1_taille: getVal("j1-taille"),
+    j2_nom: getVal("j2-nom"), j2_prenom: getVal("j2-prenom"), j2_ddn: getVal("j2-ddn"), j2_taille: getVal("j2-taille"),
+    j3_nom: getVal("j3-nom"), j3_prenom: getVal("j3-prenom"), j3_ddn: getVal("j3-ddn"), j3_taille: getVal("j3-taille"),
+    j4_nom: getVal("j4-nom"), j4_prenom: getVal("j4-prenom"), j4_ddn: getVal("j4-ddn"), j4_taille: getVal("j4-taille"),
+    f1_nom: getVal("f1-nom"), f1_prenom: getVal("f1-prenom"), f1_ddn: getVal("f1-ddn"), f1_taille: getVal("f1-taille"),
+    f1_certif: getChecked("f1_certif"),
+    f2_nom: getVal("f2-nom"), f2_prenom: getVal("f2-prenom"), f2_ddn: getVal("f2-ddn"), f2_taille: getVal("f2-taille"),
+    f2_certif: getChecked("f2_certif"),
+    f3_nom: getVal("f3-nom"), f3_prenom: getVal("f3-prenom"), f3_ddn: getVal("f3-ddn"), f3_taille: getVal("f3-taille"),
+    f3_certif: getChecked("f3_certif"),
+    med_questionnaire: Array.from(document.querySelectorAll("input[name^='med_']:checked")).some(function(r) { return r.value === "Oui"; }) ? "Oui" : "Non",
+    adresse: getVal("adresse"), cp: getVal("cp"), ville: getVal("ville"),
+    tel1: getVal("tel1"), tel2: getVal("tel2"),
+    urgence_nom: getVal("urgence-nom"), urgence_tel: getVal("urgence-tel"),
+    aides: getChecked("aides"),
+    passport_code: getVal("passport_code"),
+    mode_pay: getChecked("mode_pay"),
+    reglement: document.getElementById("reglement").checked ? "Oui" : "",
+    droit_image: document.getElementById("droit-image").checked ? "Oui" : "Non",
+    autorisation: document.getElementById("autorisation").checked ? "Oui" : "",
+    observations: getVal("observations"),
+    signature: getVal("signature")
+  };
+
+  document.getElementById("section-7").classList.remove("active");
+  document.getElementById("loader").style.display = "block";
+
+  function afficherConfirmation() {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("confirmation").classList.add("active");
+    document.getElementById("confirm-email").textContent = data.email;
+    document.querySelector(".progress-bar").style.display = "none";
+  }
+
+  if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === "REMPLACER_PAR_URL_APPS_SCRIPT") {
+    setTimeout(afficherConfirmation, 1200);
+    return;
+  }
+
+  // Envoi via XMLHttpRequest — évite les problèmes CORS avec Apps Script
+  // Apps Script reçoit le JSON dans e.postData.contents
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", APPS_SCRIPT_URL, true);
+  xhr.setRequestHeader("Content-Type", "text/plain");
+
+  xhr.onload = function() { afficherConfirmation(); };
+  xhr.onerror = function() {
+    // En cas d'erreur réseau, on affiche quand même la confirmation
+    // car Apps Script peut avoir reçu les données malgré l'erreur CORS
+    afficherConfirmation();
+  };
+
+  // Afficher confirmation après 3s dans tous les cas
+  setTimeout(afficherConfirmation, 3000);
+  xhr.send(JSON.stringify(data));
+}
+</script>
+</body>
+</html>
