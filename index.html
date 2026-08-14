@@ -1551,23 +1551,17 @@ function submitForm() {
     return;
   }
 
-  // Envoi via image/beacon — contourne totalement CORS
+  // Envoi via image invisible — contourne totalement CORS
   // Les données sont encodées en base64 dans un paramètre GET
-  var json     = JSON.stringify(data);
-  var encoded  = btoa(unescape(encodeURIComponent(json)));
-  var url      = APPS_SCRIPT_URL + "?d=" + encodeURIComponent(encoded);
+  var json    = JSON.stringify(data);
+  var encoded = btoa(unescape(encodeURIComponent(json)));
+  var url     = APPS_SCRIPT_URL + "?d=" + encodeURIComponent(encoded);
 
-  // Méthode 1 : navigator.sendBeacon (moderne, fire-and-forget)
-  var sent = false;
-  if (navigator.sendBeacon) {
-    sent = navigator.sendBeacon(APPS_SCRIPT_URL, json);
-  }
-
-  // Méthode 2 : image invisible (fonctionne toujours, sans CORS)
+  // Une seule méthode : image invisible (fire-and-forget, sans CORS)
   var img = new Image();
   img.src = url;
 
-  // Afficher confirmation après 2s dans tous les cas
+  // Afficher confirmation après 2s
   setTimeout(afficherConfirmation, 2000);
 }
 </script>
