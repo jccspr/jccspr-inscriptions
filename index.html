@@ -586,6 +586,7 @@
         <span class="saison-badge">Saison 2026 — 2027</span>
         <a href="./Horaires.pdf" target="_blank" class="header-link">📅 Horaires</a>
         <a href="./Tarifs.pdf" target="_blank" class="header-link">💶 Tarifs</a>
+        <a href="./r%C3%A8glement%20int%C3%A9rieur.pdf" target="_blank" class="header-link">📋 Règlement intérieur</a>
       </div>
     </div>
   </div>
@@ -630,7 +631,7 @@
   </div>
 
   <div class="card">
-    <div class="card-title">Discipline(s)</div>
+    <div class="card-title">Discipline(s) <a href="./Horaires.pdf" target="_blank" style="font-size:12px;font-weight:normal;margin-left:8px;color:var(--bleu);">📅 Horaires</a></div>
     <div class="alert alert-info">
       <span class="alert-icon">ℹ️</span>
       <span>Choisissez une ou plusieurs disciplines. Vous pourrez ensuite détailler les inscrits.</span>
@@ -647,7 +648,7 @@
         <input type="checkbox" id="disc-fitness" name="discipline" value="Fitness">
         <span class="check-label">
           <strong>💪 Fitness / HIIT</strong>
-          <small>Dès 15 ans — 150 € / 255 € (Fitness + HIIT)</small>
+          <small>Dès 15 ans — à partir de 150 €</small>
         </span>
       </label>
     </div>
@@ -877,13 +878,6 @@
         <input type="date" id="f1-ddn" name="f1_ddn" max="2011-09-01">
         <div class="error-msg" id="f1-ddn-error">Date obligatoire.</div>
       </div>
-      <div>
-        <label>Taille vêtement haut du corps</label>
-        <select id="f1-taille" name="f1_taille">
-          <option value="">— Sélectionner —</option>
-          <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
-        </select>
-      </div>
     </div>
   </div>
 
@@ -907,13 +901,6 @@
         <label>Date de naissance</label>
         <input type="date" id="f2-ddn" name="f2_ddn" max="2011-09-01">
       </div>
-      <div>
-        <label>Taille vêtement haut du corps</label>
-        <select id="f2-taille" name="f2_taille">
-          <option value="">— Sélectionner —</option>
-          <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
-        </select>
-      </div>
     </div>
   </div>
 
@@ -936,14 +923,6 @@
       <div>
         <label>Date de naissance</label>
         <input type="date" id="f3-ddn" name="f3_ddn" max="2011-09-01">
-      </div>
-      <div>
-        <label>Taille vêtement haut du corps</label>
-        <select id="f3-taille" name="f3_taille">
-          <option value="">— Sélectionner —</option>
-          <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
-        </select>
-
       </div>
     </div>
   </div>
@@ -993,12 +972,12 @@
     <div class="field field-row">
       <div>
         <label>Téléphone principal <span class="required">*</span></label>
-        <input type="tel" id="tel1" name="tel1" placeholder="06 XX XX XX XX">
-        <div class="error-msg" id="tel1-error">Numéro obligatoire.</div>
+        <input type="tel" id="tel1" name="tel1" placeholder="06 12 34 56 78">
+        <div class="error-msg" id="tel1-error">Format requis : XX XX XX XX XX (10 chiffres)</div>
       </div>
       <div>
         <label>Téléphone secondaire <span class="hint">optionnel</span></label>
-        <input type="tel" id="tel2" name="tel2" placeholder="06 XX XX XX XX">
+        <input type="tel" id="tel2" name="tel2" placeholder="06 12 34 56 78">
       </div>
     </div>
     <div class="field field-row">
@@ -1009,7 +988,7 @@
       </div>
       <div>
         <label>Téléphone du contact d'urgence <span class="required">*</span></label>
-        <input type="tel" id="urgence-tel" name="urgence_tel" placeholder="06 XX XX XX XX">
+        <input type="tel" id="urgence-tel" name="urgence_tel" placeholder="06 12 34 56 78">
         <div class="error-msg" id="urgence-tel-error">Numéro invalide (10 chiffres minimum).</div>
       </div>
     </div>
@@ -1082,9 +1061,10 @@
       <div class="section-desc">Récapitulatif de votre inscription et modalités de paiement</div>
     </div>
   </div>
+
   <div class="alert alert-info" style="margin-bottom:12px;">
     <span class="alert-icon">📋</span>
-    <span>Pensez à consulter notre <a href="./r%C3%A8glement%20int%C3%A9rieur.pdf" target="_blank" style="color:var(--bleu-f); font-weight:600;">règlement intérieur</a> disponible en haut de page.</span>
+    <span>Pensez à consulter notre <a href="./r%C3%A8glement%20int%C3%A9rieur.pdf" target="_blank" style="color:var(--bleu-f);font-weight:600;">règlement intérieur</a> disponible en haut de page.</span>
   </div>
 
   <div class="card" id="recap-tarif">
@@ -1102,17 +1082,8 @@
       </tbody>
       <tfoot>
         <tr class="tarif-total">
-          <td colspan="2">Total avant aides</td>
+          <td colspan="2">Total estimé</td>
           <td id="recap-total">—</td>
-        </tr>
-        <tr id="recap-aides-rows" style="display:none;">
-          <td colspan="3" style="padding:0;">
-            <table style="width:100%; border-collapse:collapse;" id="recap-aides-table"></table>
-          </td>
-        </tr>
-        <tr class="tarif-total" id="recap-net-row" style="display:none;">
-          <td colspan="2" style="color:var(--vert);">Total estimé après aides</td>
-          <td id="recap-net" style="color:var(--vert); font-weight:700;">—</td>
         </tr>
       </tfoot>
     </table>
@@ -1129,10 +1100,9 @@
           <small>Dispositif national — un coupon par enfant éligible, à apporter lors de l'inscription</small>
         </span>
       </label>
-      <div id="passsport-nb-section" style="display:none; margin:4px 0 4px 32px;">
-        <label style="font-size:13px; color:var(--gris-f);">Nombre d'enfants bénéficiaires
-          <input type="number" id="passsport_nb" min="1" max="10" value="1"
-            style="width:60px; margin-left:8px;" oninput="buildRecap()">
+      <div id="passsport-nb-section" style="display:none;margin:4px 0 4px 32px;">
+        <label style="font-size:13px;color:var(--gris-f);">Nombre d'enfants bénéficiaires
+          <input type="number" id="passsport_nb" min="1" max="10" value="1" style="width:60px;margin-left:8px;" oninput="buildRecap()">
         </label>
       </div>
       <label class="check-item">
@@ -1142,10 +1112,9 @@
           <small>Réservé aux lycéens de la région — coupon à apporter lors de l'inscription</small>
         </span>
       </label>
-      <div id="passregion-nb-section" style="display:none; margin:4px 0 4px 32px;">
-        <label style="font-size:13px; color:var(--gris-f);">Nombre d'enfants bénéficiaires
-          <input type="number" id="passregion_nb" min="1" max="10" value="1"
-            style="width:60px; margin-left:8px;" oninput="buildRecap()">
+      <div id="passregion-nb-section" style="display:none;margin:4px 0 4px 32px;">
+        <label style="font-size:13px;color:var(--gris-f);">Nombre d'enfants bénéficiaires
+          <input type="number" id="passregion_nb" min="1" max="10" value="1" style="width:60px;margin-left:8px;" oninput="buildRecap()">
         </label>
       </div>
       <label class="check-item">
@@ -1155,48 +1124,39 @@
           <small>Réservée aux collégiens de l'Isère — coupon à apporter lors de l'inscription</small>
         </span>
       </label>
-      <div id="cartetattoo-nb-section" style="display:none; margin:4px 0 4px 32px;">
-        <label style="font-size:13px; color:var(--gris-f);">Nombre d'enfants bénéficiaires
-          <input type="number" id="cartetattoo_nb" min="1" max="10" value="1"
-            style="width:60px; margin-left:8px;" oninput="buildRecap()">
+      <div id="cartetattoo-nb-section" style="display:none;margin:4px 0 4px 32px;">
+        <label style="font-size:13px;color:var(--gris-f);">Nombre d'enfants bénéficiaires
+          <input type="number" id="cartetattoo_nb" min="1" max="10" value="1" style="width:60px;margin-left:8px;" oninput="buildRecap()">
         </label>
       </div>
-      <label class="check-item">
-        <input type="checkbox" name="aides" value="ANCV (chèques vacances)" onchange="buildRecap()">
-        <span class="check-label">
-          <strong>ANCV / Chèques vacances</strong>
-          <small>Montant à préciser lors de l'inscription</small>
-        </span>
-      </label>
+
       <label class="check-item">
         <input type="checkbox" name="aides" value="Aucune aide" id="aide-aucune">
         <span class="check-label"><strong>Aucune aide</strong></span>
       </label>
     </div>
 
-  </div>
-
   <div class="card">
     <div class="card-title">Mode de règlement</div>
     <div class="check-group">
       <label class="check-item">
-        <input type="radio" name="mode_pay" value="Virement bancaire">
+        <input type="checkbox" name="mode_pay" value="Virement bancaire">
         <span class="check-label"><strong>Virement bancaire</strong><small>RIB fourni lors de l'inscription au club</small></span>
       </label>
       <label class="check-item">
-        <input type="radio" name="mode_pay" value="Chèque - règlement en 1 fois">
+        <input type="checkbox" name="mode_pay" value="Chèque - règlement en 1 fois">
         <span class="check-label"><strong>Chèque — règlement en une fois</strong><small>À l'ordre de Judo Club Chonas</small></span>
       </label>
       <label class="check-item">
-        <input type="radio" name="mode_pay" value="Chèque - règlement en 3 fois">
+        <input type="checkbox" name="mode_pay" value="Chèque - règlement en 3 fois">
         <span class="check-label"><strong>Chèque — règlement en 3 fois</strong><small>3 chèques à l'ordre de Judo Club Chonas</small></span>
       </label>
       <label class="check-item">
-        <input type="radio" name="mode_pay" value="Espèces">
+        <input type="checkbox" name="mode_pay" value="Espèces">
         <span class="check-label"><strong>Espèces</strong></span>
       </label>
       <label class="check-item">
-        <input type="radio" name="mode_pay" value="ANCV (chèques vacances)">
+        <input type="checkbox" name="mode_pay" value="ANCV (chèques vacances)">
         <span class="check-label"><strong>ANCV / Chèques vacances</strong></span>
       </label>
     </div>
@@ -1339,7 +1299,7 @@ function nextAfterCoords() {
   return document.getElementById("disc-judo").checked ? 5 : 6;
 }
 function validTel(val) {
-  return val.replace(/\s/g, '').length >= 10;
+  return /^\d{10}$/.test(val.replace(/\s/g, ''));
 }
 
 // ═══ VALIDATION ══════════════════════════════════════════════════
@@ -1395,11 +1355,15 @@ function validateFitness1() {
 }
 function validateCoords() {
   var ok = true;
-  ["adresse","cp","tel1"].forEach(function(id) {
+  ["adresse","cp"].forEach(function(id) {
     var v = document.getElementById(id).value.trim();
     markField(id, !v); showError(id + "-error", !v);
     if (!v) ok = false;
   });
+  var tel1v=document.getElementById("tel1").value.trim();
+  var tel1Ok=validTel(tel1v);
+  markField("tel1",!tel1Ok); showError("tel1-error",!tel1Ok);
+  if(!tel1Ok) ok=false;
   var ville = document.getElementById("ville");
   var vv = ville ? ville.value.trim() : "";
   markField("ville", !vv); showError("ville-error", !vv);
@@ -1472,20 +1436,20 @@ function nouvelleInscription() {
 }
 
 // ═══ PASS'SPORT ══════════════════════════════════════════════════
-function togglePassSport() {
-  var el = document.getElementById("aide-passsport");
-  var s  = document.getElementById("passsport-nb-section");
-  if (s) s.style.display = (el && el.checked) ? "block" : "none";
+function togglePassSport(){
+  var s=document.getElementById("passsport-nb-section"),el=document.getElementById("aide-passsport");
+  if(s)s.style.display=(el&&el.checked)?"block":"none";
 }
-function togglePassRegion() {
-  var el = document.getElementById("aide-passregion");
-  var s  = document.getElementById("passregion-nb-section");
-  if (s) s.style.display = (el && el.checked) ? "block" : "none";
+function togglePassRegion(){
+  var s=document.getElementById("passregion-nb-section"),el=document.getElementById("aide-passregion");
+  if(s)s.style.display=(el&&el.checked)?"block":"none";
 }
-function toggleCarteTattoo() {
-  var el = document.getElementById("aide-cartetattoo");
-  var s  = document.getElementById("cartetattoo-nb-section");
-  if (s) s.style.display = (el && el.checked) ? "block" : "none";
+function toggleCarteTattoo(){
+  var s=document.getElementById("cartetattoo-nb-section"),el=document.getElementById("aide-cartetattoo");
+  if(s)s.style.display=(el&&el.checked)?"block":"none";
+}
+function togglePassportCode(){
+  togglePassSport();
 }
 
 // ═══ QUESTIONNAIRE MÉDICAL ════════════════════════════════════════
@@ -1528,19 +1492,16 @@ function chercherVille(cp) {
 // ═══ RÉCAPITULATIF TARIF ══════════════════════════════════════════
 function getCategorie(ddn, disc) {
   if (!ddn) return { cat: "?", tarif: 0 };
-  var d   = new Date(ddn);
-  var fin = new Date(2026, 11, 31);
-  var age = fin.getFullYear() - d.getFullYear();
-  if (fin.getMonth() < d.getMonth() || (fin.getMonth() === d.getMonth() && fin.getDate() < d.getDate())) age--;
-  if (disc === "Fitness") return { cat: "Adulte", tarif: 150 };
-  if (age < 8)  return { cat: "Baby Judo",  tarif: 150 };
-  if (age < 10) return { cat: "Eveil Judo", tarif: 199 };
-  if (age < 12) return { cat: "Poussin",    tarif: 199 };
-  if (age < 14) return { cat: "Benjamin",   tarif: 209 };
-  if (age < 16) return { cat: "Minime",     tarif: 209 };
-  if (age < 18) return { cat: "Cadet",      tarif: 234 };
-  if (age < 23) return { cat: "Junior",     tarif: 234 };
-  return { cat: "Senior", tarif: 234 };
+  var annee = new Date(ddn).getFullYear();
+  if (disc === "Fitness") return { cat: "Fitness / HIIT", tarif: 150 };
+  if (annee >= 2021) return { cat: "Baby Judo",  tarif: 150 };
+  if (annee >= 2019) return { cat: "Éveil Judo", tarif: 199 };
+  if (annee >= 2017) return { cat: "Poussin",    tarif: 199 };
+  if (annee >= 2015) return { cat: "Benjamin",   tarif: 209 };
+  if (annee >= 2013) return { cat: "Minime",     tarif: 209 };
+  if (annee >= 2010) return { cat: "Cadet",      tarif: 234 };
+  if (annee >= 2007) return { cat: "Junior",     tarif: 234 };
+  return { cat: "Sénior", tarif: 234 };
 }
 
 function buildRecap() {
@@ -1584,68 +1545,6 @@ function buildRecap() {
 
   var totalEl = document.getElementById("recap-total");
   if (totalEl) totalEl.textContent = total > 0 ? fmt(total) : "—";
-
-  // ── Aides ──────────────────────────────────────────────────────
-  var aideTotal = 0;
-  var aidesHTML = "";
-  var hasAncv   = false;
-
-  // Pass'Sport : 50 € × nb bénéficiaires
-  var psEl = document.getElementById("aide-passsport");
-  if (psEl && psEl.checked) {
-    var nbPs   = parseInt(document.getElementById("passsport_nb").value) || 1;
-    var montPs = nbPs * 50;
-    aideTotal += montPs;
-    aidesHTML += "<tr><td style='padding:4px 12px; color:var(--gris-m);'>Pass'Sport (" + nbPs + " × 50 €)</td><td style='text-align:right; padding:4px 12px; color:var(--vert);'>−" + fmt(montPs) + "</td></tr>";
-  }
-
-  // Pass'région : −30 € × nb bénéficiaires
-  var prEl = document.getElementById("aide-passregion");
-  if (prEl && prEl.checked) {
-    var nbPr   = parseInt(document.getElementById("passregion_nb").value) || 1;
-    var montPr = nbPr * 30;
-    aideTotal += montPr;
-    aidesHTML += "<tr><td style='padding:4px 12px; color:var(--gris-m);'>Pass'région (" + nbPr + " × 30 €)</td><td style='text-align:right; padding:4px 12px; color:var(--vert);'>−" + fmt(montPr) + "</td></tr>";
-  }
-
-  // Carte Tattoo : −60 € × nb bénéficiaires
-  var ctEl = document.getElementById("aide-cartetattoo");
-  if (ctEl && ctEl.checked) {
-    var nbCt   = parseInt(document.getElementById("cartetattoo_nb").value) || 1;
-    var montCt = nbCt * 60;
-    aideTotal += montCt;
-    aidesHTML += "<tr><td style='padding:4px 12px; color:var(--gris-m);'>Carte Tattoo (" + nbCt + " × 60 €)</td><td style='text-align:right; padding:4px 12px; color:var(--vert);'>−" + fmt(montCt) + "</td></tr>";
-  }
-
-  // ANCV : pas déduit automatiquement
-  var ancvEl = document.querySelector("input[value=\"ANCV (chèques vacances)\"]");
-  if (ancvEl && ancvEl.checked) hasAncv = true;
-
-  // Affichage des aides
-  var aidesTable = document.getElementById("recap-aides-table");
-  var aidesRow   = document.getElementById("recap-aides-rows");
-  var netRow     = document.getElementById("recap-net-row");
-  var netEl      = document.getElementById("recap-net");
-
-  if (aideTotal > 0 || hasAncv) {
-    if (aidesTable) {
-      aidesTable.innerHTML = aidesHTML;
-      if (hasAncv) {
-        aidesTable.innerHTML += "<tr><td colspan='2' style='padding:4px 12px; font-size:11px; color:var(--gris-m);'>⚠️ Chèques vacances ANCV : montant déduit lors de l'inscription au club.</td></tr>";
-      }
-    }
-    if (aidesRow) aidesRow.style.display = "";
-  } else {
-    if (aidesRow) aidesRow.style.display = "none";
-  }
-
-  if (aideTotal > 0 && total > 0) {
-    var netTotal = Math.max(0, total - aideTotal);
-    if (netEl)  netEl.textContent = fmt(netTotal);
-    if (netRow) netRow.style.display = "";
-  } else {
-    if (netRow) netRow.style.display = "none";
-  }
 }
 
 // ═══ SOUMISSION ══════════════════════════════════════════════════
