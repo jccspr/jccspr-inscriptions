@@ -56,6 +56,8 @@
   }
   [data-theme="dark"] body { background: var(--fond); color: var(--noir); }
   [data-theme="dark"] header { background: linear-gradient(135deg, #0a1a2e 0%, #0f2640 100%); }
+  [data-theme="dark"] header h1, [data-theme="dark"] header p, [data-theme="dark"] header .saison-badge { color: #FFFFFF !important; }
+
   [data-theme="dark"] .card { background: #1F2937; border-color: #2D3748; }
   [data-theme="dark"] input, [data-theme="dark"] select, [data-theme="dark"] textarea {
     background: #1A202C; border-color: #374151; color: #F0F4F8;
@@ -86,6 +88,29 @@
     z-index: 10;
   }
   #theme-btn:hover { background: rgba(255,255,255,0.25); }
+
+  /* ── LIENS EN-TÊTE ──────────────────────────────────────────────── */
+  .header-links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .header-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.30);
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    transition: background 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .header-link:hover { background: rgba(255,255,255,0.28); }
   /* ── EN-TÊTE ────────────────────────────────────────────────────── */
   header {
     background: linear-gradient(135deg, #0f2640 0%, #1a3a5c 60%, #1a3a5c 100%);
@@ -177,7 +202,8 @@
     cursor: default;
     transition: all 0.2s;
   }
-  .step.active { color: var(--blanc); border-bottom-color: #F0C040; }
+  .step        { color: rgba(255,255,255,0.55); }
+  .step.active { color: #FFFFFF; border-bottom-color: #F0C040; }
   .step.done   { color: #7ECFA0; border-bottom-color: #7ECFA0; }
 
   /* ── CONTENEUR PRINCIPAL ───────────────────────────────────────── */
@@ -556,7 +582,11 @@
     <div class="header-text">
       <p class="club-name">Judo Club Chonas · Saint Prim · Reventin</p>
       <h1>Formulaire d'inscription</h1>
-      <span class="saison-badge">Saison 2026 — 2027</span>
+      <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:8px;">
+        <span class="saison-badge">Saison 2026 — 2027</span>
+        <a href="./Horaires.pdf" target="_blank" class="header-link">📅 Horaires</a>
+        <a href="./Tarifs.pdf" target="_blank" class="header-link">💶 Tarifs</a>
+      </div>
     </div>
   </div>
 </header>
