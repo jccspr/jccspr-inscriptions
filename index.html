@@ -1110,8 +1110,17 @@
       </tbody>
       <tfoot>
         <tr class="tarif-total">
-          <td colspan="2">Total estimé</td>
+          <td colspan="2">Total avant aides</td>
           <td id="recap-total">—</td>
+        </tr>
+        <tr id="recap-aides-rows" style="display:none;">
+          <td colspan="3" style="padding:0;">
+            <table style="width:100%; border-collapse:collapse;" id="recap-aides-table"></table>
+          </td>
+        </tr>
+        <tr class="tarif-total" id="recap-net-row" style="display:none;">
+          <td colspan="2" style="color:var(--vert);">Total estimé après aides</td>
+          <td id="recap-net" style="color:var(--vert); font-weight:700;">—</td>
         </tr>
       </tfoot>
     </table>
@@ -1122,28 +1131,40 @@
     <div class="card-title">Aides financières</div>
     <div class="check-group">
       <label class="check-item">
-        <input type="checkbox" name="aides" value="Pass'Sport 50€" id="aide-passsport" onchange="togglePassportCode()">
+        <input type="checkbox" name="aides" value="Pass'Sport 50€" id="aide-passsport" onchange="togglePassportCode(); buildRecap()">
         <span class="check-label">
           <strong>Pass'Sport — 50 €</strong>
           <small>Dispositif national — un coupon par enfant éligible, à apporter lors de l'inscription</small>
         </span>
       </label>
       <label class="check-item">
-        <input type="checkbox" name="aides" value="Pass'région 30€">
+        <input type="checkbox" name="aides" value="Pass'région 30€" id="aide-passregion" onchange="togglePassRegion(); buildRecap()">
         <span class="check-label">
           <strong>Pass'région Auvergne-Rhône-Alpes — 30 €</strong>
           <small>Réservé aux lycéens de la région — coupon à apporter lors de l'inscription</small>
         </span>
       </label>
+      <div id="passregion-nb-section" style="display:none; margin:4px 0 4px 32px;">
+        <label style="font-size:13px; color:var(--gris-f);">Nombre d'enfants bénéficiaires
+          <input type="number" id="passregion_nb" min="1" max="10" value="1"
+            style="width:60px; margin-left:8px;" oninput="buildRecap()">
+        </label>
+      </div>
       <label class="check-item">
-        <input type="checkbox" name="aides" value="Carte Tattoo 60€">
+        <input type="checkbox" name="aides" value="Carte Tattoo 60€" id="aide-cartetattoo" onchange="toggleCarteTattoo(); buildRecap()">
         <span class="check-label">
           <strong>Carte Tattoo — 60 €</strong>
           <small>Réservée aux collégiens de l'Isère — coupon à apporter lors de l'inscription</small>
         </span>
       </label>
+      <div id="cartetattoo-nb-section" style="display:none; margin:4px 0 4px 32px;">
+        <label style="font-size:13px; color:var(--gris-f);">Nombre d'enfants bénéficiaires
+          <input type="number" id="cartetattoo_nb" min="1" max="10" value="1"
+            style="width:60px; margin-left:8px;" oninput="buildRecap()">
+        </label>
+      </div>
       <label class="check-item">
-        <input type="checkbox" name="aides" value="ANCV (chèques vacances)">
+        <input type="checkbox" name="aides" value="ANCV (chèques vacances)" onchange="buildRecap()">
         <span class="check-label">
           <strong>ANCV / Chèques vacances</strong>
           <small>Montant à préciser lors de l'inscription</small>
@@ -1161,7 +1182,7 @@
       </div>
       <div class="field">
         <label>Code(s) Pass'Sport <span class="hint">Un par ligne : Prénom — Code</span></label>
-        <textarea name="passport_code" id="passport_code"
+        <textarea name="passport_code" id="passport_code" oninput="buildRecap()"
           placeholder="Ex :&#10;Lucas — ABC123&#10;Emma — DEF456"
           style="min-height:80px;"></textarea>
       </div>
@@ -1177,11 +1198,11 @@
       </label>
       <label class="check-item">
         <input type="radio" name="mode_pay" value="Chèque - règlement en 1 fois">
-        <span class="check-label"><strong>Chèque — règlement en une fois</strong><small>À l'ordre de JCCSPR</small></span>
+        <span class="check-label"><strong>Chèque — règlement en une fois</strong><small>À l'ordre de Judo Club Chonas</small></span>
       </label>
       <label class="check-item">
         <input type="radio" name="mode_pay" value="Chèque - règlement en 3 fois">
-        <span class="check-label"><strong>Chèque — règlement en 3 fois</strong><small>3 chèques à l'ordre de JCCSPR</small></span>
+        <span class="check-label"><strong>Chèque — règlement en 3 fois</strong><small>3 chèques à l'ordre de Judo Club Chonas</small></span>
       </label>
       <label class="check-item">
         <input type="radio" name="mode_pay" value="Espèces">
@@ -1470,6 +1491,16 @@ function togglePassportCode() {
   var pcs = document.getElementById("passport-codes-section");
   if (pcs) pcs.style.display = checked ? "block" : "none";
 }
+function togglePassRegion() {
+  var el = document.getElementById("aide-passregion");
+  var s  = document.getElementById("passregion-nb-section");
+  if (s) s.style.display = (el && el.checked) ? "block" : "none";
+}
+function toggleCarteTattoo() {
+  var el = document.getElementById("aide-cartetattoo");
+  var s  = document.getElementById("cartetattoo-nb-section");
+  if (s) s.style.display = (el && el.checked) ? "block" : "none";
+}
 
 // ═══ QUESTIONNAIRE MÉDICAL ════════════════════════════════════════
 document.addEventListener("DOMContentLoaded", function() {
@@ -1567,6 +1598,69 @@ function buildRecap() {
 
   var totalEl = document.getElementById("recap-total");
   if (totalEl) totalEl.textContent = total > 0 ? fmt(total) : "—";
+
+  // ── Aides ──────────────────────────────────────────────────────
+  var aideTotal = 0;
+  var aidesHTML = "";
+  var hasAncv   = false;
+
+  // Pass'Sport : 50 € × nb de codes saisis
+  var psEl = document.getElementById("aide-passsport");
+  if (psEl && psEl.checked) {
+    var codes = (document.getElementById("passport_code").value || "").trim();
+    var nbPs  = codes ? codes.split("\n").filter(function(l){ return l.trim(); }).length : 1;
+    var montPs = nbPs * 50;
+    aideTotal += montPs;
+    aidesHTML += "<tr><td style='padding:4px 12px; color:var(--gris-m);'>Pass'Sport (" + nbPs + " × 50 €)</td><td style='text-align:right; padding:4px 12px; color:var(--vert);'>−" + fmt(montPs) + "</td></tr>";
+  }
+
+  // Pass'région : −30 € × nb bénéficiaires
+  var prEl = document.getElementById("aide-passregion");
+  if (prEl && prEl.checked) {
+    var nbPr   = parseInt(document.getElementById("passregion_nb").value) || 1;
+    var montPr = nbPr * 30;
+    aideTotal += montPr;
+    aidesHTML += "<tr><td style='padding:4px 12px; color:var(--gris-m);'>Pass'région (" + nbPr + " × 30 €)</td><td style='text-align:right; padding:4px 12px; color:var(--vert);'>−" + fmt(montPr) + "</td></tr>";
+  }
+
+  // Carte Tattoo : −60 € × nb bénéficiaires
+  var ctEl = document.getElementById("aide-cartetattoo");
+  if (ctEl && ctEl.checked) {
+    var nbCt   = parseInt(document.getElementById("cartetattoo_nb").value) || 1;
+    var montCt = nbCt * 60;
+    aideTotal += montCt;
+    aidesHTML += "<tr><td style='padding:4px 12px; color:var(--gris-m);'>Carte Tattoo (" + nbCt + " × 60 €)</td><td style='text-align:right; padding:4px 12px; color:var(--vert);'>−" + fmt(montCt) + "</td></tr>";
+  }
+
+  // ANCV : pas déduit automatiquement
+  var ancvEl = document.querySelector("input[value=\"ANCV (chèques vacances)\"]");
+  if (ancvEl && ancvEl.checked) hasAncv = true;
+
+  // Affichage des aides
+  var aidesTable = document.getElementById("recap-aides-table");
+  var aidesRow   = document.getElementById("recap-aides-rows");
+  var netRow     = document.getElementById("recap-net-row");
+  var netEl      = document.getElementById("recap-net");
+
+  if (aideTotal > 0 || hasAncv) {
+    if (aidesTable) {
+      aidesTable.innerHTML = aidesHTML;
+      if (hasAncv) {
+        aidesTable.innerHTML += "<tr><td colspan='2' style='padding:4px 12px; font-size:11px; color:var(--gris-m);'>⚠️ Chèques vacances ANCV : montant déduit lors de l'inscription au club.</td></tr>";
+      }
+    }
+    if (aidesRow) aidesRow.style.display = "";
+  } else {
+    if (aidesRow) aidesRow.style.display = "none";
+  }
+
+  if (aideTotal > 0 && total > 0) {
+    var netTotal = Math.max(0, total - aideTotal);
+    if (netEl)  netEl.textContent = fmt(netTotal);
+    if (netRow) netRow.style.display = "";
+  } else {
+    if (netRow) netRow.style.display = "none";
+  }
 }
 
 // ═══ SOUMISSION ══════════════════════════════════════════════════
