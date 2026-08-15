@@ -1131,12 +1131,18 @@
     <div class="card-title">Aides financières</div>
     <div class="check-group">
       <label class="check-item">
-        <input type="checkbox" name="aides" value="Pass'Sport 50€" id="aide-passsport" onchange="togglePassportCode(); buildRecap()">
+        <input type="checkbox" name="aides" value="Pass'Sport 50€" id="aide-passsport" onchange="togglePassSport(); buildRecap()">
         <span class="check-label">
           <strong>Pass'Sport — 50 €</strong>
           <small>Dispositif national — un coupon par enfant éligible, à apporter lors de l'inscription</small>
         </span>
       </label>
+      <div id="passsport-nb-section" style="display:none; margin:4px 0 4px 32px;">
+        <label style="font-size:13px; color:var(--gris-f);">Nombre d'enfants bénéficiaires
+          <input type="number" id="passsport_nb" min="1" max="10" value="1"
+            style="width:60px; margin-left:8px;" oninput="buildRecap()">
+        </label>
+      </div>
       <label class="check-item">
         <input type="checkbox" name="aides" value="Pass'région 30€" id="aide-passregion" onchange="togglePassRegion(); buildRecap()">
         <span class="check-label">
@@ -1175,18 +1181,7 @@
         <span class="check-label"><strong>Aucune aide</strong></span>
       </label>
     </div>
-    <div id="passport-codes-section" style="display:none; margin-top:16px;">
-      <div class="alert alert-info">
-        <span class="alert-icon">ℹ️</span>
-        <span>Le Pass'Sport est un droit à déduction de 50 € associé à un enfant. Renseignez le prénom et le code pour chaque enfant concerné (le code figure sur votre espace CAF, MSA ou allocataire).</span>
-      </div>
-      <div class="field">
-        <label>Code(s) Pass'Sport <span class="hint">Un par ligne : Prénom — Code</span></label>
-        <textarea name="passport_code" id="passport_code" oninput="buildRecap()"
-          placeholder="Ex :&#10;Lucas — ABC123&#10;Emma — DEF456"
-          style="min-height:80px;"></textarea>
-      </div>
-    </div>
+
   </div>
 
   <div class="card">
@@ -1485,11 +1480,10 @@ function nouvelleInscription() {
 }
 
 // ═══ PASS'SPORT ══════════════════════════════════════════════════
-function togglePassportCode() {
+function togglePassSport() {
   var el = document.getElementById("aide-passsport");
-  var checked = el ? el.checked : false;
-  var pcs = document.getElementById("passport-codes-section");
-  if (pcs) pcs.style.display = checked ? "block" : "none";
+  var s  = document.getElementById("passsport-nb-section");
+  if (s) s.style.display = (el && el.checked) ? "block" : "none";
 }
 function togglePassRegion() {
   var el = document.getElementById("aide-passregion");
@@ -1604,11 +1598,10 @@ function buildRecap() {
   var aidesHTML = "";
   var hasAncv   = false;
 
-  // Pass'Sport : 50 € × nb de codes saisis
+  // Pass'Sport : 50 € × nb bénéficiaires
   var psEl = document.getElementById("aide-passsport");
   if (psEl && psEl.checked) {
-    var codes = (document.getElementById("passport_code").value || "").trim();
-    var nbPs  = codes ? codes.split("\n").filter(function(l){ return l.trim(); }).length : 1;
+    var nbPs   = parseInt(document.getElementById("passsport_nb").value) || 1;
     var montPs = nbPs * 50;
     aideTotal += montPs;
     aidesHTML += "<tr><td style='padding:4px 12px; color:var(--gris-m);'>Pass'Sport (" + nbPs + " × 50 €)</td><td style='text-align:right; padding:4px 12px; color:var(--vert);'>−" + fmt(montPs) + "</td></tr>";
