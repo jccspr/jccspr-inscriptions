@@ -641,7 +641,7 @@
         <input type="checkbox" id="disc-judo" name="discipline" value="Judo">
         <span class="check-label">
           <strong>🥋 Judo</strong>
-          <small>Enfants &amp; adultes dès 4 ans — 150 €</small>
+          <small>Enfants &amp; adultes dès 4 ans — à partir de 150 €</small>
         </span>
       </label>
       <label class="check-item">
@@ -1546,6 +1546,41 @@ function buildRecap() {
 
   var totalEl = document.getElementById("recap-total");
   if (totalEl) totalEl.textContent = total > 0 ? fmt(total) : "—";
+
+  // Aides financières
+  var aideTotal = 0;
+  var aideLines = [];
+  function checkAide(cbId, nbId, label, montant) {
+    var cb = document.getElementById(cbId);
+    if (cb && cb.checked) {
+      var nbEl = document.getElementById(nbId);
+      var nb = Math.max(1, parseInt((nbEl && nbEl.value) || 1));
+      var red = nb * montant;
+      aideTotal += red;
+      aideLines.push(label + " ×" + nb + " : −" + fmt(red));
+    }
+  }
+  checkAide("aide-passsport",   "passsport_nb",   "Pass'Sport",   50);
+  checkAide("aide-passregion",  "passregion_nb",  "Pass'région",  30);
+  checkAide("aide-cartetattoo", "cartetattoo_nb", "Carte Tattoo", 60);
+
+  var tfoot = document.querySelector("#recap-tarif tfoot");
+  if (tfoot) {
+    tfoot.querySelectorAll(".aide-row, .net-row").forEach(function(r){ r.remove(); });
+    if (aideTotal > 0 && total > 0) {
+      aideLines.forEach(function(line) {
+        var tr = document.createElement("tr");
+        tr.className = "aide-row";
+        tr.innerHTML = "<td colspan='2' style='font-size:0.85em;color:#2e7d32;'>" + line + "</td><td style='color:#2e7d32;font-size:0.85em;'></td>";
+        tfoot.appendChild(tr);
+      });
+      var net = Math.max(0, total - aideTotal);
+      var netTr = document.createElement("tr");
+      netTr.className = "net-row tarif-total";
+      netTr.innerHTML = "<td colspan='2'>Total net estimé</td><td id='recap-net'>" + fmt(net) + "</td>";
+      tfoot.appendChild(netTr);
+    }
+  }
 }
 
 // ═══ SOUMISSION ══════════════════════════════════════════════════
