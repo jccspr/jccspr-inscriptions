@@ -1613,7 +1613,25 @@ function submitForm() {
     adresse: getVal("adresse"), cp: getVal("cp"), ville: getVal("ville"),
     tel1: getVal("tel1"), tel2: getVal("tel2"),
     urgence_nom: getVal("urgence-nom"), urgence_tel: getVal("urgence-tel"),
-    aides: getChecked("aides"),
+    aides: (function() {
+      var parts = [];
+      var cbPS = document.getElementById("aide-passsport");
+      if (cbPS && cbPS.checked) {
+        var nb = parseInt((document.getElementById("passsport_nb") || {}).value) || 1;
+        parts.push("Pass'Sport×" + nb);
+      }
+      var cbPR = document.getElementById("aide-passregion");
+      if (cbPR && cbPR.checked) {
+        var nb = parseInt((document.getElementById("passregion_nb") || {}).value) || 1;
+        parts.push("Pass'région×" + nb);
+      }
+      var cbCT = document.getElementById("aide-cartetattoo");
+      if (cbCT && cbCT.checked) {
+        var nb = parseInt((document.getElementById("cartetattoo_nb") || {}).value) || 1;
+        parts.push("Carte Tattoo×" + nb);
+      }
+      return parts.join(", ");
+    })(),
     passport_code: getVal("passport_code"),
     mode_pay: getChecked("mode_pay"),
     reglement: document.getElementById("reglement").checked ? "Oui" : "",
