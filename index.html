@@ -742,7 +742,7 @@
     <!-- Aides applicables -->
     <div class="field" style="margin-top:16px; padding-top:16px; border-top:1px solid var(--gris-l);">
       <label>Aide(s) appliquée(s) <span class="hint">optionnel</span></label>
-      <select id="j1-aide" name="j1_aide" onchange="recalcAides()">
+      <select id="j1-aide" name="j1_aide">
         <option value="">— Aucune aide —</option>
         <option value="Pass'Sport 50€">Pass'Sport 50 €</option>
         <option value="Pass'région 30€">Pass'région 30 €</option>
@@ -795,7 +795,7 @@
     <!-- Aides applicables -->
     <div class="field" style="margin-top:16px; padding-top:16px; border-top:1px solid var(--gris-l);">
       <label>Aide(s) appliquée(s) <span class="hint">optionnel</span></label>
-      <select id="j2-aide" name="j2_aide" onchange="recalcAides()">
+      <select id="j2-aide" name="j2_aide">
         <option value="">— Aucune aide —</option>
         <option value="Pass'Sport 50€">Pass'Sport 50 €</option>
         <option value="Pass'région 30€">Pass'région 30 €</option>
@@ -848,7 +848,7 @@
     <!-- Aides applicables -->
     <div class="field" style="margin-top:16px; padding-top:16px; border-top:1px solid var(--gris-l);">
       <label>Aide(s) appliquée(s) <span class="hint">optionnel</span></label>
-      <select id="j3-aide" name="j3_aide" onchange="recalcAides()">
+      <select id="j3-aide" name="j3_aide">
         <option value="">— Aucune aide —</option>
         <option value="Pass'Sport 50€">Pass'Sport 50 €</option>
         <option value="Pass'région 30€">Pass'région 30 €</option>
@@ -900,7 +900,7 @@
     <!-- Aides applicables -->
     <div class="field" style="margin-top:16px; padding-top:16px; border-top:1px solid var(--gris-l);">
       <label>Aide(s) appliquée(s) <span class="hint">optionnel</span></label>
-      <select id="j4-aide" name="j4_aide" onchange="recalcAides()">
+      <select id="j4-aide" name="j4_aide">
         <option value="">— Aucune aide —</option>
         <option value="Pass'Sport 50€">Pass'Sport 50 €</option>
         <option value="Pass'région 30€">Pass'région 30 €</option>
@@ -977,7 +977,7 @@
     <!-- Aides applicables -->
     <div class="field" style="margin-top:16px; padding-top:16px; border-top:1px solid var(--gris-l);">
       <label>Aide(s) appliquée(s) <span class="hint">optionnel</span></label>
-      <select id="f2-aide" name="f2_aide" onchange="recalcAides()">
+      <select id="f2-aide" name="f2_aide">
         <option value="">— Aucune aide —</option>
         <option value="Pass'Sport 50€">Pass'Sport 50 €</option>
         <option value="Pass'région 30€">Pass'région 30 €</option>
@@ -1011,7 +1011,7 @@
     <!-- Aides applicables -->
     <div class="field" style="margin-top:16px; padding-top:16px; border-top:1px solid var(--gris-l);">
       <label>Aide(s) appliquée(s) <span class="hint">optionnel</span></label>
-      <select id="f3-aide" name="f3_aide" onchange="recalcAides()">
+      <select id="f3-aide" name="f3_aide">
         <option value="">— Aucune aide —</option>
         <option value="Pass'Sport 50€">Pass'Sport 50 €</option>
         <option value="Pass'région 30€">Pass'région 30 €</option>
@@ -1733,10 +1733,6 @@ function submitForm() {
     autorisation: document.getElementById("autorisation").checked ? "Oui" : "",
     observations: getVal("observations"),
     signature: getVal("signature")
-    aides_par_adherent: (function() { 
-      if (window.recalcAides) window.recalcAides(); 
-      return JSON.stringify(window.aidesParAdherent || []); 
-    })()  // ← NOUVELLE LIGNE
   };
 
   document.getElementById("section-7").classList.remove("active");
@@ -1807,39 +1803,6 @@ function updateThemeBtn(theme) {
   if (theme === 'dark') { btn.innerHTML = '☀️ <span id="theme-label">Mode clair</span>'; }
   else { btn.innerHTML = '🌙 <span id="theme-label">Mode sombre</span>'; }
 }
-</script>
-
-<script>
-// ===== Recalculer aides par adhérent =====
-function recalcAides() {
-  var aides = [];
-  
-  // Judokas
-  for (var i = 1; i <= 4; i++) {
-    var nomEl = document.getElementById('j' + i + '-nom');
-    var aideEl = document.getElementById('j' + i + '-aide');
-    var nom = nomEl ? nomEl.value : '';
-    var aide = aideEl ? aideEl.value : '';
-    if (nom && aide) {
-      aides.push({ adhérent: nom, discipline: 'Judo', aide: aide });
-    }
-  }
-  
-  // Fitness
-  for (var i = 1; i <= 3; i++) {
-    var nomEl = document.getElementById('f' + i + '-nom');
-    var aideEl = document.getElementById('f' + i + '-aide');
-    var nom = nomEl ? nomEl.value : '';
-    var aide = aideEl ? aideEl.value : '';
-    if (nom && aide) {
-      aides.push({ adhérent: nom, discipline: 'Fitness', aide: aide });
-    }
-  }
-  
-  window.aidesParAdherent = aides;
-  console.log('Aides:', aides);
-}
-// ===== Fin recalcAides =====
 </script>
 </body>
 </html>
