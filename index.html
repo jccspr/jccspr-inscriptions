@@ -951,6 +951,16 @@
         <div class="error-msg" id="f1-ddn-error">Date obligatoire.</div>
       </div>
     </div>
+    <!-- Aides applicables -->
+    <div class="field" style="margin-top:16px; padding-top:16px; border-top:1px solid var(--gris-l);">
+      <label>Aide(s) appliquée(s) <span class="hint">optionnel</span></label>
+      <select id="f1-aide" name="f1_aide">
+        <option value="">— Aucune aide —</option>
+        <option value="Pass'Sport 50€">Pass'Sport 50 €</option>
+        <option value="Pass'région 30€">Pass'région 30 €</option>
+        <option value="Carte Tattoo 60€">Carte Tattoo 60 €</option>
+      </select>
+    </div>
   </div>
 
   <button type="button" class="add-toggle" id="add-f2" onclick="showBlock('fitness-2', this)">
@@ -1736,25 +1746,21 @@ function submitForm() {
     aides_par_adherent: (function() {
       var aides = [];
       for (var i = 1; i <= 4; i++) {
-          var prenom = document.getElementById('j' + i + '-prenom');
-          var aide = document.getElementById('j' + i + '-aide');
-          if (prenom && prenom.value && aide && aide.value) {
+        var prenom = document.getElementById('j' + i + '-prenom');
+        var aide = document.getElementById('j' + i + '-aide');
+        if (prenom && prenom.value && aide && aide.value) {
           aides.push(prenom.value + ' (Judo): ' + aide.value);
-          }
-      }
+        }
       }
       for (var i = 1; i <= 3; i++) {
-  var prenom = document.getElementById('f' + i + '-prenom');
-  var aide = document.getElementById('f' + i + '-aide');
-  if (prenom && prenom.value && aide && aide.value) {
-    aides.push(prenom.value + ' (Fitness): ' + aide.value);
-  }
-}
-         }
+        var prenom = document.getElementById('f' + i + '-prenom');
+        var aide = document.getElementById('f' + i + '-aide');
+        if (prenom && prenom.value && aide && aide.value) {
+          aides.push(prenom.value + ' (Fitness): ' + aide.value);
+        }
       }
       return aides.join(' | ');
     })()
-
   };
 
   document.getElementById("section-7").classList.remove("active");
