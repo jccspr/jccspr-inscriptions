@@ -1733,6 +1733,10 @@ function submitForm() {
     autorisation: document.getElementById("autorisation").checked ? "Oui" : "",
     observations: getVal("observations"),
     signature: getVal("signature")
+    aides_par_adherent: (function() { 
+      if (window.recalcAides) window.recalcAides(); 
+      return JSON.stringify(window.aidesParAdherent || []); 
+    })()  // ← NOUVELLE LIGNE
   };
 
   document.getElementById("section-7").classList.remove("active");
