@@ -1812,19 +1812,32 @@ function updateThemeBtn(theme) {
 
 // ===== Recalculer aides par adhérent =====
 function recalcAides() {
-  const aides = [];
-  for (let i = 1; i <= 4; i++) {
-    const nom = document.getElementById(`j${i}-nom`)?.value;
-    const aide = document.getElementById(`j${i}-aide`)?.value;
-    if (nom && aide) aides.push({adhérent: nom, discipline: 'Judo', aide});
+  var aides = [];
+  
+  // Judokas
+  for (var i = 1; i <= 4; i++) {
+    var nomEl = document.getElementById('j' + i + '-nom');
+    var aideEl = document.getElementById('j' + i + '-aide');
+    var nom = nomEl ? nomEl.value : '';
+    var aide = aideEl ? aideEl.value : '';
+    if (nom && aide) {
+      aides.push({ adhérent: nom, discipline: 'Judo', aide: aide });
+    }
   }
-  for (let i = 1; i <= 3; i++) {
-    const nom = document.getElementById(`f${i}-nom`)?.value;
-    const aide = document.getElementById(`f${i}-aide`)?.value;
-    if (nom && aide) aides.push({adhérent: nom, discipline: 'Fitness', aide});
+  
+  // Fitness
+  for (var i = 1; i <= 3; i++) {
+    var nomEl = document.getElementById('f' + i + '-nom');
+    var aideEl = document.getElementById('f' + i + '-aide');
+    var nom = nomEl ? nomEl.value : '';
+    var aide = aideEl ? aideEl.value : '';
+    if (nom && aide) {
+      aides.push({ adhérent: nom, discipline: 'Fitness', aide: aide });
+    }
   }
+  
   window.aidesParAdherent = aides;
-  console.log('✓ Aides:', aides);
+  console.log('Aides:', aides);
 }
 // ===== Fin recalcAides =====
 
