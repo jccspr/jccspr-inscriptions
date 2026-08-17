@@ -739,6 +739,17 @@
         </select>
       </div>
     </div>
+    <!-- Aides applicables -->
+    <div class="field" style="margin-top:16px; padding-top:16px; border-top:1px solid var(--gris-l);">
+      <label>Aide(s) appliquée(s) <span class="hint">optionnel</span></label>
+      <select id="j1-aide" name="j1_aide" onchange="recalcAides()">
+        <option value="">— Aucune aide —</option>
+        <option value="Pass'Sport 50€">Pass'Sport 50 €</option>
+        <option value="Pass'région 30€">Pass'région 30 €</option>
+        <option value="Carte Tattoo 60€">Carte Tattoo 60 €</option>
+      </select>
+    </div>
+
   </div>
 
   <!-- Judoka 2 -->
@@ -781,6 +792,17 @@
         </select>
       </div>
     </div>
+    <!-- Aides applicables -->
+    <div class="field" style="margin-top:16px; padding-top:16px; border-top:1px solid var(--gris-l);">
+      <label>Aide(s) appliquée(s) <span class="hint">optionnel</span></label>
+      <select id="j2-aide" name="j2_aide" onchange="recalcAides()">
+        <option value="">— Aucune aide —</option>
+        <option value="Pass'Sport 50€">Pass'Sport 50 €</option>
+        <option value="Pass'région 30€">Pass'région 30 €</option>
+        <option value="Carte Tattoo 60€">Carte Tattoo 60 €</option>
+      </select>
+    </div>
+
   </div>
 
   <!-- Judoka 3 -->
@@ -823,6 +845,17 @@
         </select>
       </div>
     </div>
+    <!-- Aides applicables -->
+    <div class="field" style="margin-top:16px; padding-top:16px; border-top:1px solid var(--gris-l);">
+      <label>Aide(s) appliquée(s) <span class="hint">optionnel</span></label>
+      <select id="j3-aide" name="j3_aide" onchange="recalcAides()">
+        <option value="">— Aucune aide —</option>
+        <option value="Pass'Sport 50€">Pass'Sport 50 €</option>
+        <option value="Pass'région 30€">Pass'région 30 €</option>
+        <option value="Carte Tattoo 60€">Carte Tattoo 60 €</option>
+      </select>
+    </div>
+
   </div>
 
   <button type="button" class="add-toggle" id="add-j4" onclick="showBlock('judoka-4', this)" style="display:none; margin-top:8px;">
@@ -864,6 +897,17 @@
         </select>
       </div>
     </div>
+    <!-- Aides applicables -->
+    <div class="field" style="margin-top:16px; padding-top:16px; border-top:1px solid var(--gris-l);">
+      <label>Aide(s) appliquée(s) <span class="hint">optionnel</span></label>
+      <select id="j4-aide" name="j4_aide" onchange="recalcAides()">
+        <option value="">— Aucune aide —</option>
+        <option value="Pass'Sport 50€">Pass'Sport 50 €</option>
+        <option value="Pass'région 30€">Pass'région 30 €</option>
+        <option value="Carte Tattoo 60€">Carte Tattoo 60 €</option>
+      </select>
+    </div>
+
   </div>
 
   <div class="nav-bar">
@@ -930,6 +974,17 @@
         <input type="date" id="f2-ddn" name="f2_ddn" max="2011-09-01">
       </div>
     </div>
+    <!-- Aides applicables -->
+    <div class="field" style="margin-top:16px; padding-top:16px; border-top:1px solid var(--gris-l);">
+      <label>Aide(s) appliquée(s) <span class="hint">optionnel</span></label>
+      <select id="f2-aide" name="f2_aide" onchange="recalcAides()">
+        <option value="">— Aucune aide —</option>
+        <option value="Pass'Sport 50€">Pass'Sport 50 €</option>
+        <option value="Pass'région 30€">Pass'région 30 €</option>
+        <option value="Carte Tattoo 60€">Carte Tattoo 60 €</option>
+      </select>
+    </div>
+
   </div>
 
   <button type="button" class="add-toggle" id="add-f3" onclick="showBlock('fitness-3', this)" style="display:none; margin-top:8px;">
@@ -953,6 +1008,17 @@
         <input type="date" id="f3-ddn" name="f3_ddn" max="2011-09-01">
       </div>
     </div>
+    <!-- Aides applicables -->
+    <div class="field" style="margin-top:16px; padding-top:16px; border-top:1px solid var(--gris-l);">
+      <label>Aide(s) appliquée(s) <span class="hint">optionnel</span></label>
+      <select id="f3-aide" name="f3_aide" onchange="recalcAides()">
+        <option value="">— Aucune aide —</option>
+        <option value="Pass'Sport 50€">Pass'Sport 50 €</option>
+        <option value="Pass'région 30€">Pass'région 30 €</option>
+        <option value="Carte Tattoo 60€">Carte Tattoo 60 €</option>
+      </select>
+    </div>
+
   </div>
 
   <div class="nav-bar">
@@ -1738,6 +1804,26 @@ function updateThemeBtn(theme) {
   else { btn.innerHTML = '🌙 <span id="theme-label">Mode sombre</span>'; }
 }
 </script>
+
+
+// ===== Recalculer aides par adhérent =====
+function recalcAides() {
+  const aides = [];
+  for (let i = 1; i <= 4; i++) {
+    const nom = document.getElementById(`j${i}-nom`)?.value;
+    const aide = document.getElementById(`j${i}-aide`)?.value;
+    if (nom && aide) aides.push({adhérent: nom, discipline: 'Judo', aide});
+  }
+  for (let i = 1; i <= 3; i++) {
+    const nom = document.getElementById(`f${i}-nom`)?.value;
+    const aide = document.getElementById(`f${i}-aide`)?.value;
+    if (nom && aide) aides.push({adhérent: nom, discipline: 'Fitness', aide});
+  }
+  window.aidesParAdherent = aides;
+  console.log('✓ Aides:', aides);
+}
+// ===== Fin recalcAides =====
+
 </body>
 </html>
 
