@@ -1557,17 +1557,6 @@ function togglePassportCode(){
   togglePassSport();
 }
 
-// ═══ QUESTIONNAIRE MÉDICAL ════════════════════════════════════════
-document.addEventListener("DOMContentLoaded", function() {
-  document.querySelectorAll("input[name^='med_']").forEach(function(inp) {
-    inp.addEventListener("change", function() {
-      var hasOui = Array.from(document.querySelectorAll("input[name^='med_']:checked"))
-        .some(function(r) { return r.value === "Oui"; });
-      document.getElementById("med-alert").style.display = hasOui ? "flex" : "none";
-    });
-  });
-});
-
 // ═══ VILLE DEPUIS CODE POSTAL ════════════════════════════════════
 function chercherVille(cp) {
   var sel = document.getElementById("ville");
@@ -1713,7 +1702,7 @@ function submitForm() {
     f2_certif: getChecked("f2_certif"),
     f3_nom: getVal("f3-nom"), f3_prenom: getVal("f3-prenom"), f3_ddn: getVal("f3-ddn"), f3_taille: getVal("f3-taille"),
     f3_certif: getChecked("f3_certif"),
-    med_questionnaire: Array.from(document.querySelectorAll("input[name^='med_']:checked")).some(function(r) { return r.value === "Oui"; }) ? "Oui" : "Non",
+med_questionnaire: "Non",
     adresse: getVal("adresse"), cp: getVal("cp"), ville: getVal("ville"),
     tel1: getVal("tel1"), tel2: getVal("tel2"),
     urgence_nom: getVal("urgence-nom"), urgence_tel: getVal("urgence-tel"),
