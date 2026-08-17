@@ -1749,7 +1749,7 @@ function submitForm() {
           aides.push(nom.value + ' (Fitness): ' + aide.value);
         }
       }
-      return JSON.stringify(aides);
+      return aides.join(' | ');
     })()
 
   };
