@@ -72,22 +72,46 @@
   [data-theme="dark"] table { color: #F0F4F8; }
   [data-theme="dark"] td, [data-theme="dark"] th { border-color: #374151; }
 
-  /* ── BOUTON THÈME ───────────────────────────────────────────────── */
-  #theme-btn {
-    position: absolute;
-    top: 16px; right: 16px;
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.30);
-    color: #fff;
-    border-radius: 20px;
-    padding: 6px 12px;
-    font-size: 13px;
-    cursor: pointer;
-    display: flex; align-items: center; gap: 6px;
-    transition: background 0.2s;
-    z-index: 10;
-  }
-  #theme-btn:hover { background: rgba(255,255,255,0.25); }
+ /* ── HEADER TOP BAR ──────────────────────────────────────────────── */
+.header-topbar {
+  position: absolute;
+  top: 16px; right: 16px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#theme-btn {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.30);
+  color: #fff;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s;
+}
+#theme-btn:hover { background: rgba(255,255,255,0.25); }
+
+#btn-dirigeants {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.30);
+  color: #fff;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s;
+}
+#btn-dirigeants:hover { background: rgba(255,255,255,0.25); }
 
   /* ── LIENS EN-TÊTE ──────────────────────────────────────────────── */
   .header-links {
@@ -587,9 +611,13 @@
         <a href="./Horaires.pdf" target="_blank" class="header-link">📅 Horaires</a>
         <a href="./Tarifs.pdf" target="_blank" class="header-link">💶 Tarifs</a>
         <a href="./r%C3%A8glement%20int%C3%A9rieur.pdf" target="_blank" class="header-link">📋 Règlement intérieur</a>
-        <a href="./dashboard_jccspr.html" target="_blank" class="header-link" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.4);border-radius:6px;padding:4px 10px;font-weight:600;">📊 Espace dirigeants</a>
+        
       </div>
     </div>
+    <div class="header-topbar">
+  <button id="theme-btn" onclick="toggleTheme()" title="Changer le thème">🌙 <span id="theme-label">Mode sombre</span></button>
+  <a id="btn-dirigeants" href="./dashboard_jccspr.html" title="Accéder au dashboard">📊 Espace dirigeants</a>
+</div>
   </div>
 </header>
 
