@@ -1712,18 +1712,12 @@ function submitForm() {
   f1_nom: getVal("f1-nom"), 
   f1_prenom: getVal("f1-prenom"), 
   f1_ddn: getVal("f1-ddn"), 
-  f1_taille: getVal("f1-taille"),
-  f1_certif: getChecked("f1_certif"),
   f2_nom: getVal("f2-nom"), 
   f2_prenom: getVal("f2-prenom"), 
   f2_ddn: getVal("f2-ddn"), 
-  f2_taille: getVal("f2-taille"),
-  f2_certif: getChecked("f2_certif"),
   f3_nom: getVal("f3-nom"), 
   f3_prenom: getVal("f3-prenom"), 
   f3_ddn: getVal("f3-ddn"), 
-  f3_taille: getVal("f3-taille"),
-  f3_certif: getChecked("f3_certif"),
   adresse: getVal("adresse"), 
   cp: getVal("cp"), 
   ville: getVal("ville"),
@@ -1731,7 +1725,6 @@ function submitForm() {
   tel2: getVal("tel2"),
   urgence_nom: getVal("urgence-nom"), 
   urgence_tel: getVal("urgence-tel"),
-  med_questionnaire: "Non",
   aides: (function() {
     var parts = [];
     var cbPS = document.getElementById("aide-passsport");
@@ -1769,7 +1762,6 @@ function submitForm() {
     }
     return aides.join(' | ');
   })(),
-  passport_code: "",
   mode_pay: getChecked("mode_pay"),
   reglement: document.getElementById("reglement").checked ? "Oui" : "",
   droit_image: document.getElementById("droit-image").checked ? "Oui" : "Non",
