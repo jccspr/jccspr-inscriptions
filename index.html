@@ -1691,66 +1691,92 @@ function submitForm() {
   if (document.getElementById("disc-fitness").checked) disc.push("Fitness/Hiit");
 
   var data = {
-    email: getVal("email"), discipline: disc.join(" + "),
-    j1_nom: getVal("j1-nom"), j1_prenom: getVal("j1-prenom"), j1_ddn: getVal("j1-ddn"), j1_taille: getVal("j1-taille"),
-    j2_nom: getVal("j2-nom"), j2_prenom: getVal("j2-prenom"), j2_ddn: getVal("j2-ddn"), j2_taille: getVal("j2-taille"),
-    j3_nom: getVal("j3-nom"), j3_prenom: getVal("j3-prenom"), j3_ddn: getVal("j3-ddn"), j3_taille: getVal("j3-taille"),
-    j4_nom: getVal("j4-nom"), j4_prenom: getVal("j4-prenom"), j4_ddn: getVal("j4-ddn"), j4_taille: getVal("j4-taille"),
-    f1_nom: getVal("f1-nom"), f1_prenom: getVal("f1-prenom"), f1_ddn: getVal("f1-ddn"), f1_taille: getVal("f1-taille"),
-    f1_certif: getChecked("f1_certif"),
-    f2_nom: getVal("f2-nom"), f2_prenom: getVal("f2-prenom"), f2_ddn: getVal("f2-ddn"), f2_taille: getVal("f2-taille"),
-    f2_certif: getChecked("f2_certif"),
-    f3_nom: getVal("f3-nom"), f3_prenom: getVal("f3-prenom"), f3_ddn: getVal("f3-ddn"), f3_taille: getVal("f3-taille"),
-    f3_certif: getChecked("f3_certif"),
-med_questionnaire: "Non",
-    adresse: getVal("adresse"), cp: getVal("cp"), ville: getVal("ville"),
-    tel1: getVal("tel1"), tel2: getVal("tel2"),
-    urgence_nom: getVal("urgence-nom"), urgence_tel: getVal("urgence-tel"),
-    aides: (function() {
-      var parts = [];
-      var cbPS = document.getElementById("aide-passsport");
-      if (cbPS && cbPS.checked) {
-        var nb = parseInt((document.getElementById("passsport_nb") || {}).value) || 1;
-        parts.push("Pass'Sport×" + nb);
+  email: getVal("email"), 
+  discipline: disc.join(" + "),
+  j1_nom: getVal("j1-nom"), 
+  j1_prenom: getVal("j1-prenom"), 
+  j1_ddn: getVal("j1-ddn"), 
+  j1_taille: getVal("j1-taille"),
+  j2_nom: getVal("j2-nom"), 
+  j2_prenom: getVal("j2-prenom"), 
+  j2_ddn: getVal("j2-ddn"), 
+  j2_taille: getVal("j2-taille"),
+  j3_nom: getVal("j3-nom"), 
+  j3_prenom: getVal("j3-prenom"), 
+  j3_ddn: getVal("j3-ddn"), 
+  j3_taille: getVal("j3-taille"),
+  j4_nom: getVal("j4-nom"), 
+  j4_prenom: getVal("j4-prenom"), 
+  j4_ddn: getVal("j4-ddn"), 
+  j4_taille: getVal("j4-taille"),
+  f1_nom: getVal("f1-nom"), 
+  f1_prenom: getVal("f1-prenom"), 
+  f1_ddn: getVal("f1-ddn"), 
+  f1_taille: getVal("f1-taille"),
+  f1_certif: getChecked("f1_certif"),
+  f2_nom: getVal("f2-nom"), 
+  f2_prenom: getVal("f2-prenom"), 
+  f2_ddn: getVal("f2-ddn"), 
+  f2_taille: getVal("f2-taille"),
+  f2_certif: getChecked("f2_certif"),
+  f3_nom: getVal("f3-nom"), 
+  f3_prenom: getVal("f3-prenom"), 
+  f3_ddn: getVal("f3-ddn"), 
+  f3_taille: getVal("f3-taille"),
+  f3_certif: getChecked("f3_certif"),
+  adresse: getVal("adresse"), 
+  cp: getVal("cp"), 
+  ville: getVal("ville"),
+  tel1: getVal("tel1"), 
+  tel2: getVal("tel2"),
+  urgence_nom: getVal("urgence-nom"), 
+  urgence_tel: getVal("urgence-tel"),
+  med_questionnaire: "Non",
+  aides: (function() {
+    var parts = [];
+    var cbPS = document.getElementById("aide-passsport");
+    if (cbPS && cbPS.checked) {
+      var nb = parseInt((document.getElementById("passsport_nb") || {}).value) || 1;
+      parts.push("Pass'Sport×" + nb);
+    }
+    var cbPR = document.getElementById("aide-passregion");
+    if (cbPR && cbPR.checked) {
+      var nb = parseInt((document.getElementById("passregion_nb") || {}).value) || 1;
+      parts.push("Pass'région×" + nb);
+    }
+    var cbCT = document.getElementById("aide-cartetattoo");
+    if (cbCT && cbCT.checked) {
+      var nb = parseInt((document.getElementById("cartetattoo_nb") || {}).value) || 1;
+      parts.push("Carte Tattoo×" + nb);
+    }
+    return parts.join(", ");
+  })(),
+  aides_par_adherent: (function() {
+    var aides = [];
+    for (var i = 1; i <= 4; i++) {
+      var prenom = document.getElementById('j' + i + '-prenom');
+      var aide = document.getElementById('j' + i + '-aide');
+      if (prenom && prenom.value && aide && aide.value) {
+        aides.push(prenom.value + ' (Judo): ' + aide.value);
       }
-      var cbPR = document.getElementById("aide-passregion");
-      if (cbPR && cbPR.checked) {
-        var nb = parseInt((document.getElementById("passregion_nb") || {}).value) || 1;
-        parts.push("Pass'région×" + nb);
+    }
+    for (var i = 1; i <= 3; i++) {
+      var prenom = document.getElementById('f' + i + '-prenom');
+      var aide = document.getElementById('f' + i + '-aide');
+      if (prenom && prenom.value && aide && aide.value) {
+        aides.push(prenom.value + ' (Fitness): ' + aide.value);
       }
-      var cbCT = document.getElementById("aide-cartetattoo");
-      if (cbCT && cbCT.checked) {
-        var nb = parseInt((document.getElementById("cartetattoo_nb") || {}).value) || 1;
-        parts.push("Carte Tattoo×" + nb);
-      }
-      return parts.join(", ");
-    })(),
-    passport_code: getVal("passport_code"),
-    mode_pay: getChecked("mode_pay"),
-    reglement: document.getElementById("reglement").checked ? "Oui" : "",
-    droit_image: document.getElementById("droit-image").checked ? "Oui" : "Non",
-    autorisation: document.getElementById("autorisation").checked ? "Oui" : "",
-    observations: getVal("observations"),
-    signature: getVal("signature"),
-    aides_par_adherent: (function() {
-      var aides = [];
-      for (var i = 1; i <= 4; i++) {
-        var prenom = document.getElementById('j' + i + '-prenom');
-        var aide = document.getElementById('j' + i + '-aide');
-        if (prenom && prenom.value && aide && aide.value) {
-          aides.push(prenom.value + ' (Judo): ' + aide.value);
-        }
-      }
-      for (var i = 1; i <= 3; i++) {
-        var prenom = document.getElementById('f' + i + '-prenom');
-        var aide = document.getElementById('f' + i + '-aide');
-        if (prenom && prenom.value && aide && aide.value) {
-          aides.push(prenom.value + ' (Fitness): ' + aide.value);
-        }
-      }
-      return aides.join(' | ');
-    })()
-  };
+    }
+    return aides.join(' | ');
+  })(),
+  passport_code: "",
+  mode_pay: getChecked("mode_pay"),
+  reglement: document.getElementById("reglement").checked ? "Oui" : "",
+  droit_image: document.getElementById("droit-image").checked ? "Oui" : "Non",
+  autorisation: document.getElementById("autorisation").checked ? "Oui" : "",
+  observations: getVal("observations"),
+  signature: getVal("signature")
+};
 
   document.getElementById("section-7").classList.remove("active");
   document.getElementById("loader").style.display = "block";
