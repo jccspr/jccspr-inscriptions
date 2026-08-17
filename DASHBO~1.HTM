@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JCCSPR — Suivi inscriptions</title>
+<style>
+  :root {
+    --bleu: #1A3A5C; --bleu-c: #E3F0FB; --bleu-m: #2563a8;
+    --vert: #1E7E34; --vert-c: #E6F4EA;
+    --orange: #D97706; --orange-c: #FEF3C7;
+    --rouge: #DC2626; --rouge-c: #FEE2E2;
+    --gris: #6B7280; --gris-c: #F9FAFB;
+    --blanc: #fff; --texte: #111827;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #EEF2F7; color: var(--texte); }
+
+  header { background: var(--bleu); color: #fff; padding: 18px 24px; display:flex; align-items:center; justify-content:space-between; }
+  header h1 { font-size: 20px; font-weight: 700; }
+  header span { font-size: 13px; opacity: .7; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; padding: 20px; }
+
+  .card { background: var(--blanc); border-radius: 10px; box-shadow: 0 1px 6px rgba(0,0,0,.08); overflow: hidden; }
+  .card-header { padding: 12px 16px; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: #fff; }
+  .card-body { padding: 0; }
+
+  .kpi-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; border-bottom: 1px solid #F3F4F6; }
+  .kpi-row:last-child { border-bottom: none; }
+  .kpi-label { font-size: 13px; color: var(--gris); }
+  .kpi-val { font-size: 15px; font-weight: 700; }
+
+  .badge { display:inline-block; padding: 2px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+  .badge-vert  { background: var(--vert-c);   color: var(--vert); }
+  .badge-orange{ background: var(--orange-c); color: var(--orange); }
+  .badge-rouge { background: var(--rouge-c);  color: var(--rouge); }
+  .badge-bleu  { background: var(--bleu-c);   color: var(--bleu); }
+  .badge-gris  { background: #F3F4F6;         color: var(--gris); }
+
+  .stat-big { text-align:center; padding: 20px 16px; }
+  .stat-big .num { font-size: 42px; font-weight: 800; color: var(--bleu); }
+  .stat-big .sub { font-size: 13px; color: var(--gris); margin-top: 4px; }
+
+  .progress-wrap { padding: 14px 16px; }
+  .progress-label { display:flex; justify-content:space-between; font-size:12px; margin-bottom:5px; color: var(--gris); }
+  .progress-bar { height: 10px; border-radius: 5px; background: #E5E7EB; overflow:hidden; margin-bottom:10px; }
+  .progress-fill { height:100%; border-radius:5px; }
+
+  .cat-bar { display:flex; align-items:center; gap:10px; padding:7px 16px; border-bottom:1px solid #F3F4F6; }
+  .cat-bar:last-child { border-bottom:none; }
+  .cat-name { font-size:13px; width:100px; flex-shrink:0; }
+  .cat-track { flex:1; height:8px; background:#E5E7EB; border-radius:4px; overflow:hidden; }
+  .cat-fill  { height:100%; border-radius:4px; background: var(--bleu-m); }
+  .cat-nb { font-size:12px; font-weight:700; width:24px; text-align:right; color: var(--bleu); }
+
+  .finance-row { display:flex; justify-content:space-between; align-items:center; padding:9px 16px; border-bottom:1px solid #F3F4F6; }
+  .finance-row:last-child { border-bottom:none; }
+  .finance-label { font-size:13px; color: var(--gris); }
+  .finance-val { font-size:13px; font-weight:700; }
+  .finance-row.total { background: var(--vert-c); }
+  .finance-row.reste { background: var(--orange-c); }
+  .finance-row.total .finance-val { color: var(--vert); font-size:15px; }
+  .finance-row.reste .finance-val { color: var(--orange); font-size:15px; }
+
+  .adherent-table { width:100%; border-collapse:collapse; font-size:13px; }
+  .adherent-table th { background: var(--bleu); color:#fff; padding:9px 12px; text-align:left; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; }
+  .adherent-table td { padding:9px 12px; border-bottom:1px solid #F3F4F6; }
+  .adherent-table tr:last-child td { border-bottom:none; }
+  .adherent-table tr:nth-child(even) td { background: var(--gris-c); }
+
+  .full-width { grid-column: 1 / -1; }
+
+  @media (max-width:600px) {
+    .grid { padding:12px; gap:12px; }
+    header h1 { font-size:16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🥋 JCCSPR — Suivi des inscriptions 2026-2027</h1>
+  <span id="maj">Mis à jour : —</span>
+</header>
+
+<div class="grid">
+
+  <!-- KPIs principaux -->
+  <div class="card">
+    <div class="card-header" style="background:var(--bleu)">Indicateurs clés</div>
+    <div class="stat-big">
+      <div class="num" id="total-inscrits">—</div>
+      <div class="sub">adhérents inscrits</div>
+    </div>
+    <div class="card-body">
+      <div class="kpi-row"><span class="kpi-label">dont Judo</span><span class="kpi-val" id="nb-judo">—</span></div>
+      <div class="kpi-row"><span class="kpi-label">dont Fitness / HIIT</span><span class="kpi-val" id="nb-fitness">—</span></div>
+    </div>
+  </div>
+
+  <!-- Statut paiements -->
+  <div class="card">
+    <div class="card-header" style="background:var(--vert)">Statut paiements</div>
+    <div class="card-body">
+      <div class="kpi-row">
+        <span class="kpi-label">Complet</span>
+        <span class="badge badge-vert" id="pay-complet">—</span>
+      </div>
+      <div class="kpi-row">
+        <span class="kpi-label">Partiel</span>
+        <span class="badge badge-orange" id="pay-partiel">—</span>
+      </div>
+      <div class="kpi-row">
+        <span class="kpi-label">En attente</span>
+        <span class="badge badge-rouge" id="pay-attente">—</span>
+      </div>
+      <div class="progress-wrap" id="paiement-progress-wrap">
+        <div class="progress-label"><span>Taux de complétion</span><span id="taux-pay">—</span></div>
+        <div class="progress-bar"><div class="progress-fill" id="bar-pay" style="width:0%;background:var(--vert)"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Répartition par catégorie -->
+  <div class="card">
+    <div class="card-header" style="background:#5C3317">Catégories FFJDA</div>
+    <div class="card-body" id="cat-list">
+      <!-- généré JS -->
+    </div>
+  </div>
+
+  <!-- Finances -->
+  <div class="card">
+    <div class="card-header" style="background:var(--vert)">Cotisations</div>
+    <div class="card-body">
+      <div class="finance-row"><span class="finance-label">Cotisations brutes</span><span class="finance-val" id="f-brut">—</span></div>
+      <div class="finance-row"><span class="finance-label">Remises famille</span><span class="finance-val" style="color:var(--bleu)" id="f-remise">—</span></div>
+      <div class="finance-row"><span class="finance-label">Aides déduites</span><span class="finance-val" style="color:var(--bleu)" id="f-aides">—</span></div>
+      <div class="finance-row total"><span class="finance-label"><strong>Total à percevoir</strong></span><span class="finance-val" id="f-du">—</span></div>
+      <div class="finance-row"><span class="finance-label">Total perçu</span><span class="finance-val" style="color:var(--vert)" id="f-percu">—</span></div>
+      <div class="finance-row reste"><span class="finance-label"><strong>Reste à percevoir</strong></span><span class="finance-val" id="f-reste">—</span></div>
+    </div>
+  </div>
+
+  <!-- Aides -->
+  <div class="card">
+    <div class="card-header" style="background:#6B21A8">Aides financières</div>
+    <div class="card-body" id="aides-list">
+      <!-- généré JS -->
+    </div>
+  </div>
+
+  <!-- Liste adhérents -->
+  <div class="card full-width">
+    <div class="card-header" style="background:var(--bleu)">Liste des adhérents</div>
+    <div style="overflow-x:auto">
+      <table class="adherent-table">
+        <thead>
+          <tr>
+            <th>N°</th><th>Discipline</th><th>Nom</th><th>Prénom</th>
+            <th>Catégorie</th><th>Cotisation</th><th>Montant dû</th>
+            <th>Reçu</th><th>Statut</th>
+          </tr>
+        </thead>
+        <tbody id="adherents-tbody">
+          <tr><td colspan="9" style="text-align:center;color:var(--gris);padding:24px">
+            Connecte ce dashboard à ton Google Sheet pour afficher les données en temps réel.
+          </td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════
+// CONFIG — colle ici l'URL de ton déploiement Apps Script
+// ══════════════════════════════════════════════════════════
+var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPFX0E3mbecoDaSyJEns_hSCl_7sAe2ic6KdeOA_61QUWdQPANo9rn2uHzYZ2rVXbasQ/exec";
+
+var CATEGORIES_ORDRE = ["Baby Judo","Éveil Judo","Poussin","Benjamin","Minime","Cadet","Junior","Sénior","Adulte"];
+
+// ══════════════════════════════════════════════════════════
+// CHARGEMENT DONNÉES LIVE
+// ══════════════════════════════════════════════════════════
+function chargerDonnees() {
+  document.getElementById("adherents-tbody").innerHTML =
+    '<tr><td colspan="9" style="text-align:center;color:var(--gris);padding:24px">Chargement…</td></tr>';
+
+  fetch(APPS_SCRIPT_URL + "?action=getData")
+    .then(function(r) { return r.json(); })
+    .then(function(res) {
+      if (!res.ok) throw new Error(res.error || "Erreur serveur");
+      var adherents = res.adherents;
+      var DATA = buildData(adherents);
+      render(DATA);
+    })
+    .catch(function(err) {
+      document.getElementById("adherents-tbody").innerHTML =
+        '<tr><td colspan="9" style="text-align:center;color:var(--rouge);padding:24px">Erreur de chargement : ' + err.message + '</td></tr>';
+    });
+}
+
+function buildData(adherents) {
+  var cats = {};
+  CATEGORIES_ORDRE.forEach(function(c) { cats[c] = 0; });
+  var pay = { complet:0, partiel:0, attente:0 };
+  var fin = { brut:0, remise:0, passport:0, passregion:0, tattoo:0, cheqVac:0, du:0, percu:0, reste:0 };
+  var nbJudo = 0, nbFitness = 0;
+  var aidesNb = { passport:0, passregion:0, tattoo:0, cheqVac:0 };
+
+  adherents.forEach(function(a) {
+    if (a.discipline === "Judo") nbJudo++;
+    if (a.discipline === "Fitness") nbFitness++;
+    if (cats[a.categorie] !== undefined) cats[a.categorie]++;
+    var s = String(a.statut).toLowerCase();
+    if (s.includes("soldé") || s.includes("solde")) pay.complet++;
+    else if (s.includes("partiel")) pay.partiel++;
+    else pay.attente++;
+    fin.brut      += a.brut;
+    fin.remise    += a.remise;
+    fin.passport  += a.passport;
+    fin.passregion+= a.passregion;
+    fin.tattoo    += a.tattoo;
+    fin.cheqVac   += a.cheqVac;
+    fin.du        += a.du;
+    fin.percu     += a.recu;
+    fin.reste     += a.reste;
+    if (a.passport   > 0) aidesNb.passport++;
+    if (a.passregion > 0) aidesNb.passregion++;
+    if (a.tattoo     > 0) aidesNb.tattoo++;
+    if (a.cheqVac    > 0) aidesNb.cheqVac++;
+  });
+
+  return {
+    inscrits: adherents.length, judo: nbJudo, fitness: nbFitness,
+    paiements: pay,
+    categories: CATEGORIES_ORDRE.map(function(c) { return { nom:c, nb:cats[c]||0 }; }),
+    finances: fin,
+    aides: [
+      { nom:"Pass'Sport (50 €/enfant)",  nb: aidesNb.passport },
+      { nom:"Pass'région (30 €/enfant)", nb: aidesNb.passregion },
+      { nom:"Carte Tattoo (60 €)",       nb: aidesNb.tattoo },
+      { nom:"Chèques vacances",          nb: aidesNb.cheqVac },
+    ],
+    adherents: adherents
+  };
+}
+
+// ══════════════════════════════════════════════════════════
+// RENDU
+// ══════════════════════════════════════════════════════════
+
+function fmt(n) {
+  return n.toLocaleString("fr-FR", { minimumFractionDigits:2, maximumFractionDigits:2 }) + " €";
+}
+
+function statut_badge(s) {
+  var sl = String(s).toLowerCase();
+  var cls = (sl.includes("soldé")||sl.includes("solde")) ? "badge-vert" : sl.includes("partiel") ? "badge-orange" : "badge-rouge";
+  return '<span class="badge ' + cls + '">' + s + '</span>';
+}
+
+function render(DATA) {
+  document.getElementById("maj").textContent = "Mis à jour : " + new Date().toLocaleString("fr-FR", {day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"});
+
+  document.getElementById("total-inscrits").textContent = DATA.inscrits;
+  document.getElementById("nb-judo").textContent        = DATA.judo;
+  document.getElementById("nb-fitness").textContent     = DATA.fitness;
+
+  var p = DATA.paiements;
+  document.getElementById("pay-complet").textContent = p.complet;
+  document.getElementById("pay-partiel").textContent = p.partiel;
+  document.getElementById("pay-attente").textContent = p.attente;
+  var taux = DATA.inscrits > 0 ? Math.round(p.complet / DATA.inscrits * 100) : 0;
+  document.getElementById("taux-pay").textContent = taux + "%";
+  document.getElementById("bar-pay").style.width = taux + "%";
+
+  var maxCat = Math.max.apply(null, DATA.categories.map(function(c) { return c.nb; })) || 1;
+  document.getElementById("cat-list").innerHTML = DATA.categories.map(function(c) {
+    var pct = Math.round(c.nb / maxCat * 100);
+    return '<div class="cat-bar">'
+      + '<span class="cat-name">' + c.nom + '</span>'
+      + '<div class="cat-track"><div class="cat-fill" style="width:' + pct + '%"></div></div>'
+      + '<span class="cat-nb">' + c.nb + '</span>'
+      + '</div>';
+  }).join("");
+
+  var f = DATA.finances;
+  document.getElementById("f-brut").textContent   = fmt(f.brut);
+  document.getElementById("f-remise").textContent = "− " + fmt(f.remise);
+  document.getElementById("f-aides").textContent  = "− " + fmt(f.aides);
+  document.getElementById("f-du").textContent     = fmt(f.du);
+  document.getElementById("f-percu").textContent  = fmt(f.percu);
+  document.getElementById("f-reste").textContent  = fmt(f.reste);
+
+  document.getElementById("aides-list").innerHTML = DATA.aides.map(function(a, i) {
+    return '<div class="kpi-row" style="background:' + (i%2?"#F9FAFB":"#fff") + '">'
+      + '<span class="kpi-label">' + a.nom + '</span>'
+      + '<span class="kpi-val">' + a.nb + '</span>'
+      + '</div>';
+  }).join("");
+
+  document.getElementById("adherents-tbody").innerHTML = DATA.adherents.length === 0
+    ? '<tr><td colspan="9" style="text-align:center;color:var(--gris);padding:24px">Aucun adhérent</td></tr>'
+    : DATA.adherents.map(function(a) {
+        return '<tr>'
+          + '<td>' + a.num + '</td>'
+          + '<td><span class="badge ' + (a.discipline==="Judo"?"badge-bleu":"badge-gris") + '">' + a.discipline + '</span></td>'
+          + '<td><strong>' + a.nom + '</strong></td>'
+          + '<td>' + a.prenom + '</td>'
+          + '<td>' + a.categorie + '</td>'
+          + '<td>' + fmt(a.brut) + '</td>'
+          + '<td><strong>' + fmt(a.du) + '</strong></td>'
+          + '<td>' + fmt(a.recu) + '</td>'
+          + '<td>' + statut_badge(a.statut) + '</td>'
+          + '</tr>';
+      }).join("");
+}
+
+// Lancement au chargement
+chargerDonnees();
+</script>
+</body>
+</html>
