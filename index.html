@@ -1736,18 +1736,21 @@ function submitForm() {
     aides_par_adherent: (function() {
       var aides = [];
       for (var i = 1; i <= 4; i++) {
-        var nom = document.getElementById('j' + i + '-nom');
-        var aide = document.getElementById('j' + i + '-aide');
-        if (nom && nom.value && aide && aide.value) {
-          aides.push(nom.value + ' (Judo): ' + aide.value);
-        }
+          var prenom = document.getElementById('j' + i + '-prenom');
+          var aide = document.getElementById('j' + i + '-aide');
+          if (prenom && prenom.value && aide && aide.value) {
+          aides.push(prenom.value + ' (Judo): ' + aide.value);
+          }
+      }
       }
       for (var i = 1; i <= 3; i++) {
-        var nom = document.getElementById('f' + i + '-nom');
-        var aide = document.getElementById('f' + i + '-aide');
-        if (nom && nom.value && aide && aide.value) {
-          aides.push(nom.value + ' (Fitness): ' + aide.value);
-        }
+  var prenom = document.getElementById('f' + i + '-prenom');
+  var aide = document.getElementById('f' + i + '-aide');
+  if (prenom && prenom.value && aide && aide.value) {
+    aides.push(prenom.value + ' (Fitness): ' + aide.value);
+  }
+}
+         }
       }
       return aides.join(' | ');
     })()
