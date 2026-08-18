@@ -604,7 +604,7 @@
     </div>
     <div class="header-text">
       <p class="club-name">Judo Club Chonas · Saint Prim · Reventin</p>
-      <h1>Formulaire d'inscription<span id="last-update" style="position:absolute;right:24px;font-size:11px;font-style:italic;color:var(--gris-m);"></span></h1>
+      <h1 style="position:relative;">Formulaire d'inscription<span id="last-update" style="position:absolute;right:24px;font-size:11px;font-style:italic;color:var(--gris-m);"></span></h1>
       <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:8px;">
         <span class="saison-badge">Saison 2026 — 2027</span>
         <a href="./Horaires.pdf" target="_blank" class="header-link">📅 Horaires</a>
@@ -1639,6 +1639,7 @@ function buildRecap() {
     if (nomEl && nomEl.value && ddnEl && ddnEl.value) {
       var info = getCategorie(ddnEl.value, disc);
       info.nom = nomEl.value;
+    info.prenom = prenomEl.value;
       info.prefix = prefix;
       membres.push(info);
     }
@@ -1684,7 +1685,7 @@ function buildRecap() {
       if (!aidesByMember[aideName]) {
         aidesByMember[aideName] = [];
       }
-      aidesByMember[aideName].push(m.nom);
+      aidesByMember[aideName].push(m.prenom);
       var montant = aidesMap[aideName] || 0;
       aideTotal += montant;
     });
