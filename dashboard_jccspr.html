@@ -196,6 +196,7 @@
       <div class="finance-row"><span class="finance-label">Cotisations brutes</span><span class="finance-val" id="f-brut">—</span></div>
       <div class="finance-row"><span class="finance-label">Remises famille</span><span class="finance-val" style="color:var(--bleu)" id="f-remise">—</span></div>
       <div class="finance-row"><span class="finance-label">Aides déduites</span><span class="finance-val" style="color:var(--bleu)" id="f-aides">—</span></div>
+      <div class="finance-row"><span class="finance-label">Chèques vacances</span><span class="finance-val" style="color:var(--bleu)" id="f-cheqvac">—</span></div>
       <div class="finance-row total"><span class="finance-label"><strong>Total à percevoir</strong></span><span class="finance-val" id="f-du">—</span></div>
       <div class="finance-row"><span class="finance-label">Total perçu</span><span class="finance-val" style="color:var(--vert)" id="f-percu">—</span></div>
       <div class="finance-row reste"><span class="finance-label"><strong>Reste à percevoir</strong></span><span class="finance-val" id="f-reste">—</span></div>
@@ -355,8 +356,9 @@ function render(DATA) {
   var f = DATA.finances;
   document.getElementById("f-brut").textContent   = fmt(f.brut);
   document.getElementById("f-remise").textContent = "− " + fmt(f.remise);
- var aidesTotal = f.passport + f.passregion + f.tattoo + f.cheqVac;
+ var aidesTotal = f.passport + f.passregion + f.tattoo;
   document.getElementById("f-aides").textContent  = "− " + fmt(aidesTotal);
+  document.getElementById("f-cheqvac").textContent = "− " + fmt(f.cheqVac);
   document.getElementById("f-du").textContent     = fmt(f.du);
   document.getElementById("f-percu").textContent  = fmt(f.percu);
   document.getElementById("f-reste").textContent  = fmt(f.reste);
