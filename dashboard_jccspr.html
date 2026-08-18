@@ -251,7 +251,7 @@ function chargerDonnees() {
   fetch(APPS_SCRIPT_URL + "?action=getData")
     .then(function(r) { return r.json(); })
     .then(function(res) {
-      if (!res.ok) throw new Error(res.error || "Erreur serveur");
+     if (!res.success) throw new Error(res.error || "Erreur serveur");
       var adherents = res.adherents;
       var DATA = buildData(adherents);
       render(DATA);
