@@ -742,7 +742,7 @@
     <!-- Aides applicables -->
     <div class="field" style="margin-top:16px; padding-top:16px; border-top:1px solid var(--gris-l);">
       <label>Aide(s) appliquée(s) <span class="hint">optionnel</span></label>
-      <select id="j1-aide" name="j1_aide">
+      <select id="j1-aide" name="j1_aide" onchange="buildRecap()">
         <option value="">— Aucune aide —</option>
         <option value="Pass'Sport 50€">Pass'Sport 50 €</option>
         <option value="Pass'région 30€">Pass'région 30 €</option>
@@ -795,7 +795,7 @@
     <!-- Aides applicables -->
     <div class="field" style="margin-top:16px; padding-top:16px; border-top:1px solid var(--gris-l);">
       <label>Aide(s) appliquée(s) <span class="hint">optionnel</span></label>
-      <select id="j2-aide" name="j2_aide">
+      <select id="j2-aide" name="j2_aide" onchange="buildRecap()">
         <option value="">— Aucune aide —</option>
         <option value="Pass'Sport 50€">Pass'Sport 50 €</option>
         <option value="Pass'région 30€">Pass'région 30 €</option>
@@ -848,7 +848,7 @@
     <!-- Aides applicables -->
     <div class="field" style="margin-top:16px; padding-top:16px; border-top:1px solid var(--gris-l);">
       <label>Aide(s) appliquée(s) <span class="hint">optionnel</span></label>
-      <select id="j3-aide" name="j3_aide">
+      <select id="j3-aide" name="j3_aide" onchange="buildRecap()">
         <option value="">— Aucune aide —</option>
         <option value="Pass'Sport 50€">Pass'Sport 50 €</option>
         <option value="Pass'région 30€">Pass'région 30 €</option>
@@ -900,7 +900,7 @@
     <!-- Aides applicables -->
     <div class="field" style="margin-top:16px; padding-top:16px; border-top:1px solid var(--gris-l);">
       <label>Aide(s) appliquée(s) <span class="hint">optionnel</span></label>
-      <select id="j4-aide" name="j4_aide">
+      <select id="j4-aide" name="j4_aide" onchange="buildRecap()">
         <option value="">— Aucune aide —</option>
         <option value="Pass'Sport 50€">Pass'Sport 50 €</option>
         <option value="Pass'région 30€">Pass'région 30 €</option>
@@ -954,7 +954,7 @@
     <!-- Aides applicables -->
     <div class="field" style="margin-top:16px; padding-top:16px; border-top:1px solid var(--gris-l);">
       <label>Aide(s) appliquée(s) <span class="hint">optionnel</span></label>
-      <select id="f1-aide" name="f1_aide">
+      <select id="f1-aide" name="f1_aide" onchange="buildRecap()">
         <option value="">— Aucune aide —</option>
         <option value="Pass'Sport 50€">Pass'Sport 50 €</option>
         <option value="Pass'région 30€">Pass'région 30 €</option>
@@ -987,7 +987,7 @@
     <!-- Aides applicables -->
     <div class="field" style="margin-top:16px; padding-top:16px; border-top:1px solid var(--gris-l);">
       <label>Aide(s) appliquée(s) <span class="hint">optionnel</span></label>
-      <select id="f2-aide" name="f2_aide">
+      <select id="f2-aide" name="f2_aide" onchange="buildRecap()">
         <option value="">— Aucune aide —</option>
         <option value="Pass'Sport 50€">Pass'Sport 50 €</option>
         <option value="Pass'région 30€">Pass'région 30 €</option>
@@ -1021,7 +1021,7 @@
     <!-- Aides applicables -->
     <div class="field" style="margin-top:16px; padding-top:16px; border-top:1px solid var(--gris-l);">
       <label>Aide(s) appliquée(s) <span class="hint">optionnel</span></label>
-      <select id="f3-aide" name="f3_aide">
+      <select id="f3-aide" name="f3_aide" onchange="buildRecap()">
         <option value="">— Aucune aide —</option>
         <option value="Pass'Sport 50€">Pass'Sport 50 €</option>
         <option value="Pass'région 30€">Pass'région 30 €</option>
@@ -1192,53 +1192,6 @@
       </tfoot>
     </table>
     <p style="font-size:12px; color:var(--gris-m); margin-top:10px;">* Les remises famille et aides seront calculées et confirmées lors de l'inscription au club.</p>
-  </div>
-
-  <div class="card">
-    <div class="card-title">Aides financières</div>
-    <div class="check-group">
-      <label class="check-item">
-        <input type="checkbox" name="aides" value="Pass'Sport 50€" id="aide-passsport" onchange="togglePassSport(); buildRecap()">
-        <span class="check-label">
-          <strong>Pass'Sport — 50 €</strong>
-          <small>Dispositif national — un coupon par enfant éligible, à apporter lors de l'inscription</small>
-        </span>
-      </label>
-      <div id="passsport-nb-section" style="display:none;margin:4px 0 4px 32px;">
-        <label style="font-size:13px;color:var(--gris-f);">Nombre d'enfants bénéficiaires
-          <input type="number" id="passsport_nb" min="1" max="10" value="1" style="width:60px;margin-left:8px;" oninput="buildRecap()">
-        </label>
-      </div>
-      <label class="check-item">
-        <input type="checkbox" name="aides" value="Pass'région 30€" id="aide-passregion" onchange="togglePassRegion(); buildRecap()">
-        <span class="check-label">
-          <strong>Pass'région Auvergne-Rhône-Alpes — 30 €</strong>
-          <small>Réservé aux lycéens de la région — coupon à apporter lors de l'inscription</small>
-        </span>
-      </label>
-      <div id="passregion-nb-section" style="display:none;margin:4px 0 4px 32px;">
-        <label style="font-size:13px;color:var(--gris-f);">Nombre d'enfants bénéficiaires
-          <input type="number" id="passregion_nb" min="1" max="10" value="1" style="width:60px;margin-left:8px;" oninput="buildRecap()">
-        </label>
-      </div>
-      <label class="check-item">
-        <input type="checkbox" name="aides" value="Carte Tattoo 60€" id="aide-cartetattoo" onchange="toggleCarteTattoo(); buildRecap()">
-        <span class="check-label">
-          <strong>Carte Tattoo — 60 €</strong>
-          <small>Réservée aux collégiens de l'Isère — coupon à apporter lors de l'inscription</small>
-        </span>
-      </label>
-      <div id="cartetattoo-nb-section" style="display:none;margin:4px 0 4px 32px;">
-        <label style="font-size:13px;color:var(--gris-f);">Nombre d'enfants bénéficiaires
-          <input type="number" id="cartetattoo_nb" min="1" max="10" value="1" style="width:60px;margin-left:8px;" oninput="buildRecap()">
-        </label>
-      </div>
-
-      <label class="check-item">
-        <input type="checkbox" name="aides" value="Aucune aide" id="aide-aucune">
-        <span class="check-label"><strong>Aucune aide</strong></span>
-      </label>
-    </div>
   </div>
 
   <div class="card">
@@ -1557,6 +1510,17 @@ function togglePassportCode(){
   togglePassSport();
 }
 
+// ═══ QUESTIONNAIRE MÉDICAL ════════════════════════════════════════
+document.addEventListener("DOMContentLoaded", function() {
+  document.querySelectorAll("input[name^='med_']").forEach(function(inp) {
+    inp.addEventListener("change", function() {
+      var hasOui = Array.from(document.querySelectorAll("input[name^='med_']:checked"))
+        .some(function(r) { return r.value === "Oui"; });
+      document.getElementById("med-alert").style.display = hasOui ? "flex" : "none";
+    });
+  });
+});
+
 // ═══ VILLE DEPUIS CODE POSTAL ════════════════════════════════════
 function chercherVille(cp) {
   var sel = document.getElementById("ville");
@@ -1612,6 +1576,7 @@ function buildRecap() {
     if (nomEl && nomEl.value && ddnEl && ddnEl.value) {
       var info = getCategorie(ddnEl.value, disc);
       info.nom = nomEl.value;
+      info.prefix = prefix;
       membres.push(info);
     }
   }
@@ -1640,33 +1605,44 @@ function buildRecap() {
   var totalEl = document.getElementById("recap-total");
   if (totalEl) totalEl.textContent = total > 0 ? fmt(total) : "—";
 
-  // Aides financières
+  // Récupérer les aides depuis les listes déroulantes des enfants
+  var aidesByMember = {};
   var aideTotal = 0;
-  var aideLines = [];
-  function checkAide(cbId, nbId, label, montant) {
-    var cb = document.getElementById(cbId);
-    if (cb && cb.checked) {
-      var nbEl = document.getElementById(nbId);
-      var nb = Math.max(1, parseInt((nbEl && nbEl.value) || 1));
-      var red = nb * montant;
-      aideTotal += red;
-      aideLines.push(label + " ×" + nb + " : −" + fmt(red));
-    }
-  }
-  checkAide("aide-passsport",   "passsport_nb",   "Pass'Sport",   50);
-  checkAide("aide-passregion",  "passregion_nb",  "Pass'région",  30);
-  checkAide("aide-cartetattoo", "cartetattoo_nb", "Carte Tattoo", 60);
+  var aidesMap = {
+    "Pass'Sport 50€": 50,
+    "Pass'région 30€": 30,
+    "Carte Tattoo 60€": 60
+  };
 
+  membres.forEach(function(m) {
+    var aideEl = document.getElementById(m.prefix + "-aide");
+    if (aideEl && aideEl.value && aideEl.value !== "") {
+      if (!aidesByMember[aideEl.value]) {
+        aidesByMember[aideEl.value] = [];
+      }
+      aidesByMember[aideEl.value].push(m.nom);
+      var montant = aidesMap[aideEl.value] || 0;
+      aideTotal += montant;
+    }
+  });
+
+  // Afficher l'aide estimée
   var tfoot = document.querySelector("#recap-tarif tfoot");
   if (tfoot) {
-    tfoot.querySelectorAll(".aide-row, .net-row").forEach(function(r){ r.remove(); });
+    tfoot.querySelectorAll(".aide-row, .aide-detail-row, .net-row").forEach(function(r){ r.remove(); });
+
+    // Afficher les aides par enfant
+    for (var aideName in aidesByMember) {
+      var enfants = aidesByMember[aideName];
+      var montant = aidesMap[aideName];
+      var tr = document.createElement("tr");
+      tr.className = "aide-detail-row";
+      var listeEnfants = enfants.join(", ");
+      tr.innerHTML = "<td colspan='2' style='font-size:0.85em;color:#2e7d32;'>" + aideName + ": " + listeEnfants + "</td><td style='color:#2e7d32;font-size:0.85em;'>−" + fmt(montant) + "</td>";
+      tfoot.appendChild(tr);
+    }
+
     if (aideTotal > 0 && total > 0) {
-      aideLines.forEach(function(line) {
-        var tr = document.createElement("tr");
-        tr.className = "aide-row";
-        tr.innerHTML = "<td colspan='2' style='font-size:0.85em;color:#2e7d32;'>" + line + "</td><td style='color:#2e7d32;font-size:0.85em;'></td>";
-        tfoot.appendChild(tr);
-      });
       var net = Math.max(0, total - aideTotal);
       var netTr = document.createElement("tr");
       netTr.className = "net-row tarif-total";
@@ -1691,84 +1667,67 @@ function submitForm() {
   if (document.getElementById("disc-fitness").checked) disc.push("Fitness/Hiit");
 
   var data = {
-  email: getVal("email"), 
-  discipline: disc.join(" + "),
-  j1_nom: getVal("j1-nom"), 
-  j1_prenom: getVal("j1-prenom"), 
-  j1_ddn: getVal("j1-ddn"), 
-  j1_taille: getVal("j1-taille"),
-  j2_nom: getVal("j2-nom"), 
-  j2_prenom: getVal("j2-prenom"), 
-  j2_ddn: getVal("j2-ddn"), 
-  j2_taille: getVal("j2-taille"),
-  j3_nom: getVal("j3-nom"), 
-  j3_prenom: getVal("j3-prenom"), 
-  j3_ddn: getVal("j3-ddn"), 
-  j3_taille: getVal("j3-taille"),
-  j4_nom: getVal("j4-nom"), 
-  j4_prenom: getVal("j4-prenom"), 
-  j4_ddn: getVal("j4-ddn"), 
-  j4_taille: getVal("j4-taille"),
-  f1_nom: getVal("f1-nom"), 
-  f1_prenom: getVal("f1-prenom"), 
-  f1_ddn: getVal("f1-ddn"), 
-  f2_nom: getVal("f2-nom"), 
-  f2_prenom: getVal("f2-prenom"), 
-  f2_ddn: getVal("f2-ddn"), 
-  f3_nom: getVal("f3-nom"), 
-  f3_prenom: getVal("f3-prenom"), 
-  f3_ddn: getVal("f3-ddn"), 
-  adresse: getVal("adresse"), 
-  cp: getVal("cp"), 
-  ville: getVal("ville"),
-  tel1: getVal("tel1"), 
-  tel2: getVal("tel2"),
-  urgence_nom: getVal("urgence-nom"), 
-  urgence_tel: getVal("urgence-tel"),
-  aides: (function() {
-    var parts = [];
-    var cbPS = document.getElementById("aide-passsport");
-    if (cbPS && cbPS.checked) {
-      var nb = parseInt((document.getElementById("passsport_nb") || {}).value) || 1;
-      parts.push("Pass'Sport×" + nb);
-    }
-    var cbPR = document.getElementById("aide-passregion");
-    if (cbPR && cbPR.checked) {
-      var nb = parseInt((document.getElementById("passregion_nb") || {}).value) || 1;
-      parts.push("Pass'région×" + nb);
-    }
-    var cbCT = document.getElementById("aide-cartetattoo");
-    if (cbCT && cbCT.checked) {
-      var nb = parseInt((document.getElementById("cartetattoo_nb") || {}).value) || 1;
-      parts.push("Carte Tattoo×" + nb);
-    }
-    return parts.join(", ");
-  })(),
-  aides_par_adherent: (function() {
-    var aides = [];
-    for (var i = 1; i <= 4; i++) {
-      var prenom = document.getElementById('j' + i + '-prenom');
-      var aide = document.getElementById('j' + i + '-aide');
-      if (prenom && prenom.value && aide && aide.value) {
-        aides.push(prenom.value + ' (Judo): ' + aide.value);
+    email: getVal("email"), discipline: disc.join(" + "),
+    j1_nom: getVal("j1-nom"), j1_prenom: getVal("j1-prenom"), j1_ddn: getVal("j1-ddn"), j1_taille: getVal("j1-taille"),
+    j2_nom: getVal("j2-nom"), j2_prenom: getVal("j2-prenom"), j2_ddn: getVal("j2-ddn"), j2_taille: getVal("j2-taille"),
+    j3_nom: getVal("j3-nom"), j3_prenom: getVal("j3-prenom"), j3_ddn: getVal("j3-ddn"), j3_taille: getVal("j3-taille"),
+    j4_nom: getVal("j4-nom"), j4_prenom: getVal("j4-prenom"), j4_ddn: getVal("j4-ddn"), j4_taille: getVal("j4-taille"),
+    f1_nom: getVal("f1-nom"), f1_prenom: getVal("f1-prenom"), f1_ddn: getVal("f1-ddn"), f1_taille: getVal("f1-taille"),
+    f1_certif: getChecked("f1_certif"),
+    f2_nom: getVal("f2-nom"), f2_prenom: getVal("f2-prenom"), f2_ddn: getVal("f2-ddn"), f2_taille: getVal("f2-taille"),
+    f2_certif: getChecked("f2_certif"),
+    f3_nom: getVal("f3-nom"), f3_prenom: getVal("f3-prenom"), f3_ddn: getVal("f3-ddn"), f3_taille: getVal("f3-taille"),
+    f3_certif: getChecked("f3_certif"),
+    med_questionnaire: Array.from(document.querySelectorAll("input[name^='med_']:checked")).some(function(r) { return r.value === "Oui"; }) ? "Oui" : "Non",
+    adresse: getVal("adresse"), cp: getVal("cp"), ville: getVal("ville"),
+    tel1: getVal("tel1"), tel2: getVal("tel2"),
+    urgence_nom: getVal("urgence-nom"), urgence_tel: getVal("urgence-tel"),
+    aides: (function() {
+      var aideCount = {};
+      for (var i = 1; i <= 4; i++) {
+        var aide = document.getElementById('j' + i + '-aide');
+        if (aide && aide.value) {
+          aideCount[aide.value] = (aideCount[aide.value] || 0) + 1;
+        }
       }
-    }
-    for (var i = 1; i <= 3; i++) {
-      var prenom = document.getElementById('f' + i + '-prenom');
-      var aide = document.getElementById('f' + i + '-aide');
-      if (prenom && prenom.value && aide && aide.value) {
-        aides.push(prenom.value + ' (Fitness): ' + aide.value);
+      for (var i = 1; i <= 3; i++) {
+        var aide = document.getElementById('f' + i + '-aide');
+        if (aide && aide.value) {
+          aideCount[aide.value] = (aideCount[aide.value] || 0) + 1;
+        }
       }
-    }
-    return aides.join(' | ');
-  })(),
-  mode_pay: getChecked("mode_pay"),
-  reglement: document.getElementById("reglement").checked ? "Oui" : "",
-  droit_image: document.getElementById("droit-image").checked ? "Oui" : "Non",
-  autorisation: document.getElementById("autorisation").checked ? "Oui" : "",
-  observations: getVal("observations"),
-  signature: getVal("signature")
-};
+      var parts = [];
+      for (var aideType in aideCount) {
+        parts.push(aideType + "×" + aideCount[aideType]);
+      }
+      return parts.join(", ");
+    })(),
+    passport_code: getVal("passport_code"),
+    mode_pay: getChecked("mode_pay"),
+    reglement: document.getElementById("reglement").checked ? "Oui" : "",
+    droit_image: document.getElementById("droit-image").checked ? "Oui" : "Non",
+    autorisation: document.getElementById("autorisation").checked ? "Oui" : "",
+    observations: getVal("observations"),
+    signature: getVal("signature"),
+    aides_par_adherent: (function() {
+      var aides = [];
+      for (var i = 1; i <= 4; i++) {
+        var prenom = document.getElementById('j' + i + '-prenom');
+        var aide = document.getElementById('j' + i + '-aide');
+        if (prenom && prenom.value && aide && aide.value) {
+          aides.push(prenom.value + ' (Judo): ' + aide.value);
+        }
+      }
+      for (var i = 1; i <= 3; i++) {
+        var prenom = document.getElementById('f' + i + '-prenom');
+        var aide = document.getElementById('f' + i + '-aide');
+        if (prenom && prenom.value && aide && aide.value) {
+          aides.push(prenom.value + ' (Fitness): ' + aide.value);
+        }
+      }
+      return aides.join(' | ');
+    })()
+  };
 
   document.getElementById("section-7").classList.remove("active");
   document.getElementById("loader").style.display = "block";
