@@ -1825,22 +1825,7 @@ function submitForm() {
   // Afficher confirmation après 2s
   setTimeout(afficherConfirmation, 2000);
 }
-  // Encode et envoie les données
-  var base64encoded = btoa(JSON.stringify(data));
-  fetch(APPS_SCRIPT_URL + "?d=" + encodeURIComponent(base64encoded))
-    .then(function(response) { return response.json(); })
-    .then(function(result) {
-      if (result.success) {
-        alert("✓ Inscription enregistrée avec succès!");
-        document.getElementById("monForm").reset();
-      } else {
-        alert("✗ Erreur: " + result.error);
-      }
-    })
-    .catch(function(err) {
-      alert("✗ Erreur d'envoi: " + err);
-    });
-}
+  
 function updateMedSection() {
   var hasJudo = document.getElementById('disc-judo') && document.getElementById('disc-judo').checked;
   var hasFitness = document.getElementById('disc-fitness') && document.getElementById('disc-fitness').checked;
