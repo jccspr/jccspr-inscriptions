@@ -1807,7 +1807,7 @@ function submitForm() {
     document.querySelector(".progress-bar").style.display = "none";
   }
 
-  if (!APPS_SCRIPT_URL) {
+  if (!) {
     setTimeout(afficherConfirmation, 1200);
     return;
   }
@@ -1816,7 +1816,7 @@ function submitForm() {
   // Les données sont encodées en base64 dans un paramètre GET
   var json    = JSON.stringify(data);
   var encoded = btoa(unescape(encodeURIComponent(json)));
-  var url     = APPS_SCRIPT_URL + "?d=" + encodeURIComponent(encoded);
+  var url     =  + "?d=" + encodeURIComponent(encoded);
 
   // Une seule méthode : image invisible (fire-and-forget, sans CORS)
   var img = new Image();
@@ -1825,7 +1825,22 @@ function submitForm() {
   // Afficher confirmation après 2s
   setTimeout(afficherConfirmation, 2000);
 }
-
+  // Encode et envoie les données
+  var base64encoded = btoa(JSON.stringify(data));
+  fetch(APPS_SCRIPT_URL + "?d=" + encodeURIComponent(base64encoded))
+    .then(function(response) { return response.json(); })
+    .then(function(result) {
+      if (result.success) {
+        alert("✓ Inscription enregistrée avec succès!");
+        document.getElementById("monForm").reset();
+      } else {
+        alert("✗ Erreur: " + result.error);
+      }
+    })
+    .catch(function(err) {
+      alert("✗ Erreur d'envoi: " + err);
+    });
+}
 function updateMedSection() {
   var hasJudo = document.getElementById('disc-judo') && document.getElementById('disc-judo').checked;
   var hasFitness = document.getElementById('disc-fitness') && document.getElementById('disc-fitness').checked;
